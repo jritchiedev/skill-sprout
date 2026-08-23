@@ -13,21 +13,21 @@ export default function FluencySessionScreen() {
   const theme = useTheme();
   const router = useRouter();
   const store = useFluencyStore();
-  const elapsed = useTimer(store.startTimestamp, store.sessionState === 'running');
-
-  useEffect(() => {
-    if (store.sessionState !== 'running') {
-      store.startReading();
-    }
-  }, []);
+  const isRunning = store.sessionState === 'running';
+  const elapsed = useTimer(store.startTimestamp, isRunning);
 
   useEffect(() => {
     const handler = BackHandler.addEventListener('hardwareBackPress', () => {
-      confirmAbandon();
+      if (isRunning) {
+        confirmAbandon();
+      } else {
+        store.reset();
+        router.back();
+      }
       return true;
     });
     return () => handler.remove();
-  }, []);
+  }, [isRunning]);
 
   function confirmAbandon() {
     Alert.alert(
@@ -51,6 +51,11 @@ export default function FluencySessionScreen() {
     );
   }
 
+  function handleStart() {
+    store.startReading();
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  }
+
   function handleError() {
     store.addError();
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -72,7 +77,11 @@ export default function FluencySessionScreen() {
     <SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]}>
       <View style={styles.container}>
         <View style={styles.topRow}>
-          <TouchableOpacity onPress={confirmAbandon} style={styles.backBtn} accessibilityLabel="Back">
+          <TouchableOpacity
+            onPress={isRunning ? confirmAbandon : () => { store.reset(); router.back(); }}
+            style={styles.backBtn}
+            accessibilityLabel="Back"
+          >
             <Text style={[styles.backText, { color: theme.textSecondary }]}>← Back</Text>
           </TouchableOpacity>
           <View style={styles.infoChip}>
@@ -88,41 +97,64 @@ export default function FluencySessionScreen() {
           </Text>
         </View>
 
-        <TouchableOpacity
-          style={[styles.errorButton, { backgroundColor: theme.error }]}
-          onPress={handleError}
-          activeOpacity={0.6}
-          accessibilityRole="button"
-          accessibilityLabel={`Mark error. Current errors: ${errorCount}`}
-        >
-          <Text style={[styles.errorButtonText, { color: theme.errorText }]}>ERROR</Text>
-        </TouchableOpacity>
-
-        <View style={styles.errorRow}>
-          <Text style={[styles.errorCount, { color: theme.text }]}>
-            {errorCount} {errorCount === 1 ? 'error' : 'errors'}
-          </Text>
-          {errorCount > 0 && (
+        {isRunning ? (
+          <>
             <TouchableOpacity
-              onPress={handleUndo}
-              style={[styles.undoButton, { borderColor: theme.border }]}
+              style={[styles.errorButton, { backgroundColor: theme.error }]}
+              onPress={handleError}
+              activeOpacity={0.6}
               accessibilityRole="button"
-              accessibilityLabel="Undo last error"
+              accessibilityLabel={`Mark error. Current errors: ${errorCount}`}
             >
-              <Text style={[styles.undoText, { color: theme.textSecondary }]}>Undo</Text>
+              <Text style={[styles.errorButtonText, { color: theme.errorText }]}>ERROR</Text>
             </TouchableOpacity>
-          )}
-        </View>
 
-        <TouchableOpacity
-          style={[styles.stopButton, { backgroundColor: theme.surface, borderColor: theme.border }]}
-          onPress={handleStop}
-          activeOpacity={0.7}
-          accessibilityRole="button"
-          accessibilityLabel="Stop reading"
-        >
-          <Text style={[styles.stopText, { color: theme.text }]}>Stop Reading</Text>
-        </TouchableOpacity>
+            <View style={styles.errorRow}>
+              <Text style={[styles.errorCount, { color: theme.text }]}>
+                {errorCount} {errorCount === 1 ? 'error' : 'errors'}
+              </Text>
+              {errorCount > 0 && (
+                <TouchableOpacity
+                  onPress={handleUndo}
+                  style={[styles.undoButton, { borderColor: theme.border }]}
+                  accessibilityRole="button"
+                  accessibilityLabel="Undo last error"
+                >
+                  <Text style={[styles.undoText, { color: theme.textSecondary }]}>Undo</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+            <TouchableOpacity
+              style={[styles.stopButton, { backgroundColor: theme.surface, borderColor: theme.border }]}
+              onPress={handleStop}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel="Stop reading"
+            >
+              <Text style={[styles.stopText, { color: theme.text }]}>Stop Reading</Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <>
+            <View style={styles.readyMessage}>
+              <Text style={[styles.readyTitle, { color: theme.text }]}>Ready?</Text>
+              <Text style={[styles.readySubtitle, { color: theme.textSecondary }]}>
+                Tap Start when the student begins reading aloud
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={[styles.startButton, { backgroundColor: theme.primary }]}
+              onPress={handleStart}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel="Start timer"
+            >
+              <Text style={[styles.startButtonText, { color: theme.primaryText }]}>Start</Text>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -138,6 +170,18 @@ const styles = StyleSheet.create({
   infoText: { fontSize: fontSize.sm },
   timerSection: { alignItems: 'center', paddingVertical: spacing.lg },
   timer: { fontSize: 64, fontWeight: '200', fontVariant: ['tabular-nums'] },
+  readyMessage: { alignItems: 'center', paddingHorizontal: spacing.lg },
+  readyTitle: { fontSize: fontSize.xxl, fontWeight: '700', marginBottom: spacing.sm },
+  readySubtitle: { fontSize: fontSize.md, textAlign: 'center' },
+  startButton: {
+    height: 160,
+    borderRadius: borderRadius.xl,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: spacing.md,
+    marginBottom: spacing.md,
+  },
+  startButtonText: { fontSize: 36, fontWeight: '800', letterSpacing: 2 },
   errorButton: {
     height: 160,
     borderRadius: borderRadius.xl,
