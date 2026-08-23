@@ -18,7 +18,6 @@ export function StatBox({ label, value, unit, highlight }: StatBoxProps) {
         styles.container,
         {
           backgroundColor: highlight ? theme.primaryLight : theme.surface,
-          borderColor: highlight ? theme.primary : theme.border,
         },
       ]}
     >
@@ -43,7 +42,6 @@ export function StatBox({ label, value, unit, highlight }: StatBoxProps) {
 const styles = StyleSheet.create({
   container: {
     borderRadius: borderRadius.md,
-    borderWidth: 1,
     padding: spacing.md,
     alignItems: 'center',
     flex: 1,
@@ -62,6 +60,7 @@ const styles = StyleSheet.create({
   value: {
     fontSize: fontSize.xxl,
     fontWeight: '700',
+    fontVariant: ['tabular-nums'],
   },
   unit: {
     fontSize: fontSize.sm,
