@@ -6,7 +6,7 @@ import { getRecentAttempts } from '@/src/db';
 import { ReadingAttempt } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { formatTime } from '@/src/utils/calculations';
-import { spacing, fontSize, borderRadius } from '@/src/theme';
+import { spacing, fontSize, borderRadius, shadow } from '@/src/theme';
 
 export default function HistoryTab() {
   const theme = useTheme();
@@ -25,7 +25,7 @@ export default function HistoryTab() {
 
   function renderAttempt({ item }: { item: ReadingAttempt }) {
     return (
-      <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
+      <View style={[styles.card, shadow.sm, { backgroundColor: theme.card }]}>
         <View style={styles.cardHeader}>
           <Text style={[styles.passageTitle, { color: theme.text }]} numberOfLines={1}>
             {item.passageTitleSnapshot || 'Untitled'}
@@ -38,21 +38,24 @@ export default function HistoryTab() {
         <View style={styles.cardStats}>
           <View style={styles.stat}>
             <Text style={[styles.statValue, { color: theme.primary }]}>{Math.round(item.wpm)}</Text>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>WPM</Text>
+            <Text style={[styles.statLabel, { color: theme.textTertiary }]}>WPM</Text>
           </View>
+          <View style={[styles.statDivider, { backgroundColor: theme.separator }]} />
           <View style={styles.stat}>
             <Text style={[styles.statValue, { color: theme.text }]}>{item.accuracy.toFixed(1)}%</Text>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Accuracy</Text>
+            <Text style={[styles.statLabel, { color: theme.textTertiary }]}>Accuracy</Text>
           </View>
+          <View style={[styles.statDivider, { backgroundColor: theme.separator }]} />
           <View style={styles.stat}>
             <Text style={[styles.statValue, { color: theme.text }]}>
               {item.wordsCorrect}/{item.totalWords}
             </Text>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Correct</Text>
+            <Text style={[styles.statLabel, { color: theme.textTertiary }]}>Correct</Text>
           </View>
+          <View style={[styles.statDivider, { backgroundColor: theme.separator }]} />
           <View style={styles.stat}>
             <Text style={[styles.statValue, { color: theme.text }]}>{formatTime(item.elapsedMilliseconds)}</Text>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>Time</Text>
+            <Text style={[styles.statLabel, { color: theme.textTertiary }]}>Time</Text>
           </View>
         </View>
       </View>
@@ -68,9 +71,9 @@ export default function HistoryTab() {
         contentContainerStyle={styles.list}
         ListEmptyComponent={
           <EmptyState
-            icon="📊"
+            icon="📈"
             title="No History Yet"
-            message="Complete and save a fluency reading to see your history here."
+            message="Complete and save a fluency reading to see results here."
           />
         }
       />
@@ -80,10 +83,9 @@ export default function HistoryTab() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  list: { padding: spacing.md },
+  list: { padding: spacing.lg },
   card: {
     borderRadius: borderRadius.lg,
-    borderWidth: 1,
     padding: spacing.md,
     marginBottom: spacing.sm,
   },
@@ -91,12 +93,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.sm,
+    marginBottom: spacing.md,
   },
   passageTitle: { fontSize: fontSize.md, fontWeight: '600', flex: 1, marginRight: spacing.sm },
   date: { fontSize: fontSize.xs },
-  cardStats: { flexDirection: 'row', justifyContent: 'space-between' },
-  stat: { alignItems: 'center' },
-  statValue: { fontSize: fontSize.lg, fontWeight: '700' },
-  statLabel: { fontSize: fontSize.xs, marginTop: 2 },
+  cardStats: { flexDirection: 'row', alignItems: 'center' },
+  stat: { flex: 1, alignItems: 'center' },
+  statValue: { fontSize: fontSize.md, fontWeight: '700', fontVariant: ['tabular-nums'] },
+  statLabel: { fontSize: 10, marginTop: 2, textTransform: 'uppercase', letterSpacing: 0.3 },
+  statDivider: { width: 1, height: 28, opacity: 0.5 },
 });

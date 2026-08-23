@@ -8,7 +8,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { getAllStudents, createStudent, deleteStudent, getStudentAttemptCount } from '@/src/db';
 import { Student } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
-import { spacing, fontSize, borderRadius, minTouchTarget } from '@/src/theme';
+import { spacing, fontSize, borderRadius, minTouchTarget, shadow } from '@/src/theme';
 
 export default function StudentsTab() {
   const theme = useTheme();
@@ -62,17 +62,21 @@ export default function StudentsTab() {
   function renderStudent({ item }: { item: Student }) {
     return (
       <TouchableOpacity
-        style={[styles.studentRow, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
+        style={[styles.studentRow, shadow.sm, { backgroundColor: theme.card }]}
         onPress={() => router.push(`/students/${item.id}`)}
         onLongPress={() => handleDelete(item)}
         activeOpacity={0.7}
         accessibilityRole="button"
         accessibilityLabel={item.name}
+        accessibilityHint="Tap to view details, hold to delete"
       >
         <View style={[styles.avatar, { backgroundColor: item.avatarColor }]}>
           <Text style={styles.avatarText}>{item.name.charAt(0).toUpperCase()}</Text>
         </View>
-        <Text style={[styles.studentName, { color: theme.text }]}>{item.name}</Text>
+        <View style={styles.studentInfo}>
+          <Text style={[styles.studentName, { color: theme.text }]}>{item.name}</Text>
+        </View>
+        <Text style={[styles.chevron, { color: theme.textTertiary }]}>{'›'}</Text>
       </TouchableOpacity>
     );
   }
@@ -80,21 +84,21 @@ export default function StudentsTab() {
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]} edges={[]}>
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <View style={[styles.addRow, { borderColor: theme.border }]}>
+        <View style={[styles.addRow]}>
           <TextInput
-            placeholder="New student name..."
+            placeholder="Add a student..."
             placeholderTextColor={theme.textTertiary}
             value={newName}
             onChangeText={setNewName}
             onSubmitEditing={handleAdd}
             returnKeyType="done"
-            style={[styles.addInput, { color: theme.text, backgroundColor: theme.surface, borderColor: theme.border }]}
+            style={[styles.addInput, { color: theme.text, backgroundColor: theme.surface }]}
             accessibilityLabel="New student name"
           />
           <TouchableOpacity
             onPress={handleAdd}
             disabled={adding || !newName.trim()}
-            style={[styles.addButton, { backgroundColor: theme.primary, opacity: newName.trim() ? 1 : 0.5 }]}
+            style={[styles.addButton, { backgroundColor: theme.primary, opacity: newName.trim() ? 1 : 0.4 }]}
             accessibilityRole="button"
             accessibilityLabel="Add student"
           >
@@ -109,9 +113,9 @@ export default function StudentsTab() {
           contentContainerStyle={styles.list}
           ListEmptyComponent={
             <EmptyState
-              icon="👤"
+              icon="👥"
               title="No Students Yet"
-              message="Add a student to start tracking reading progress."
+              message="Add a student above to start tracking their reading progress."
             />
           }
         />
@@ -123,12 +127,11 @@ export default function StudentsTab() {
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   flex: { flex: 1 },
-  addRow: { flexDirection: 'row', padding: spacing.md, gap: spacing.sm },
+  addRow: { flexDirection: 'row', padding: spacing.lg, paddingBottom: spacing.md, gap: spacing.sm },
   addInput: {
     flex: 1,
     minHeight: minTouchTarget,
     borderRadius: borderRadius.md,
-    borderWidth: 1,
     paddingHorizontal: spacing.md,
     fontSize: fontSize.md,
   },
@@ -140,23 +143,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButtonText: { fontSize: fontSize.md, fontWeight: '600' },
-  list: { padding: spacing.md, paddingTop: 0 },
+  list: { paddingHorizontal: spacing.lg },
   studentRow: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: spacing.md,
     borderRadius: borderRadius.lg,
-    borderWidth: 1,
     marginBottom: spacing.sm,
   },
   avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 42,
+    height: 42,
+    borderRadius: 21,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: spacing.md,
   },
   avatarText: { color: '#FFF', fontSize: fontSize.lg, fontWeight: '700' },
-  studentName: { fontSize: fontSize.lg, fontWeight: '500', flex: 1 },
+  studentInfo: { flex: 1 },
+  studentName: { fontSize: fontSize.md, fontWeight: '500' },
+  chevron: { fontSize: 20, fontWeight: '300' },
 });

@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# PencilBox
+# Skill Sprout
 
 Elementary education tools app built with React Native / Expo / TypeScript.
 

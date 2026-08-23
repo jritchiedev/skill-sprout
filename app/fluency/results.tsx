@@ -75,12 +75,12 @@ export default function ResultsScreen() {
         </View>
 
         {store.passageTitle ? (
-          <Text style={[styles.passageInfo, { color: theme.textSecondary }]}>
+          <Text style={[styles.passageInfo, { color: theme.textTertiary }]}>
             {store.studentName ? `${store.studentName} · ` : ''}{store.passageTitle}
           </Text>
         ) : null}
 
-        <View style={[styles.statsCard, { backgroundColor: theme.surface, borderColor: theme.border }]}>
+        <View style={[styles.statsCard, { backgroundColor: theme.surface }]}>
           <View style={styles.statsRow}>
             <StatBox label="Words Correct" value={`${wordsCorrect}/${totalWords}`} />
             <View style={{ width: spacing.sm }} />
@@ -98,7 +98,7 @@ export default function ResultsScreen() {
             <Button title="Save Result" onPress={handleSave} loading={saving} />
           ) : (
             <View style={[styles.savedBanner, { backgroundColor: theme.successLight }]}>
-              <Text style={[styles.savedText, { color: theme.success }]}>Saved!</Text>
+              <Text style={[styles.savedText, { color: theme.success }]}>Saved</Text>
             </View>
           )}
           <View style={{ height: spacing.sm }} />
@@ -113,14 +113,13 @@ export default function ResultsScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  content: { flex: 1, padding: spacing.md, justifyContent: 'center' },
+  content: { flex: 1, padding: spacing.lg, justifyContent: 'center' },
   header: { alignItems: 'center', marginBottom: spacing.sm },
-  wpmValue: { fontSize: 72, fontWeight: '800' },
-  wpmLabel: { fontSize: fontSize.lg, fontWeight: '500' },
+  wpmValue: { fontSize: 72, fontWeight: '800', fontVariant: ['tabular-nums'] },
+  wpmLabel: { fontSize: fontSize.lg, fontWeight: '400' },
   passageInfo: { fontSize: fontSize.md, textAlign: 'center', marginBottom: spacing.lg },
   statsCard: {
     borderRadius: borderRadius.lg,
-    borderWidth: 1,
     padding: spacing.md,
     marginBottom: spacing.xl,
   },
@@ -132,5 +131,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  savedText: { fontSize: fontSize.lg, fontWeight: '700' },
+  savedText: { fontSize: fontSize.lg, fontWeight: '600' },
 });

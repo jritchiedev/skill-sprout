@@ -9,7 +9,7 @@ import { getAllPassages, createPassage, updatePassage, deletePassage } from '@/s
 import { Passage } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { Button } from '@/src/components/Button';
-import { spacing, fontSize, borderRadius, minTouchTarget } from '@/src/theme';
+import { spacing, fontSize, borderRadius, minTouchTarget, shadow } from '@/src/theme';
 
 export default function ManagePassagesScreen() {
   const theme = useTheme();
@@ -105,10 +105,11 @@ export default function ManagePassagesScreen() {
         }
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={[styles.row, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
+            style={[styles.row, shadow.sm, { backgroundColor: theme.card }]}
             onPress={() => openEdit(item)}
             onLongPress={() => handleDelete(item)}
             activeOpacity={0.7}
+            accessibilityHint="Tap to edit, hold to delete"
           >
             <View>
               <Text style={[styles.rowTitle, { color: theme.text }]}>{item.title}</Text>
@@ -129,7 +130,8 @@ export default function ManagePassagesScreen() {
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         >
           <View style={styles.modalOverlayFill} />
-          <View style={[styles.modalContent, { backgroundColor: theme.background, borderColor: theme.border }]}>
+          <View style={[styles.modalContent, { backgroundColor: theme.background }]}>
+            <View style={[styles.modalHandle, { backgroundColor: theme.border }]} />
             <Text style={[styles.modalTitle, { color: theme.text }]}>
               {editingId ? 'Edit Passage' : 'New Passage'}
             </Text>
@@ -138,7 +140,7 @@ export default function ManagePassagesScreen() {
               placeholderTextColor={theme.textTertiary}
               value={titleText}
               onChangeText={setTitleText}
-              style={[styles.input, { color: theme.text, backgroundColor: theme.surface, borderColor: theme.border }]}
+              style={[styles.input, { color: theme.text, backgroundColor: theme.surface }]}
               autoFocus
             />
             <TextInput
@@ -149,7 +151,7 @@ export default function ManagePassagesScreen() {
               keyboardType="number-pad"
               returnKeyType="done"
               onSubmitEditing={handleSave}
-              style={[styles.input, { color: theme.text, backgroundColor: theme.surface, borderColor: theme.border }]}
+              style={[styles.input, { color: theme.text, backgroundColor: theme.surface }]}
             />
             <View style={styles.modalActions}>
               <Button
@@ -169,11 +171,10 @@ export default function ManagePassagesScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  list: { padding: spacing.md },
+  list: { padding: spacing.lg },
   row: {
     padding: spacing.md,
     borderRadius: borderRadius.lg,
-    borderWidth: 1,
     marginBottom: spacing.sm,
   },
   rowTitle: { fontSize: fontSize.md, fontWeight: '600' },
@@ -188,16 +189,20 @@ const styles = StyleSheet.create({
   modalContent: {
     borderTopLeftRadius: borderRadius.xl,
     borderTopRightRadius: borderRadius.xl,
-    borderWidth: 1,
-    borderBottomWidth: 0,
     padding: spacing.lg,
     paddingBottom: spacing.xxl,
+  },
+  modalHandle: {
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+    alignSelf: 'center',
+    marginBottom: spacing.lg,
   },
   modalTitle: { fontSize: fontSize.xl, fontWeight: '700', marginBottom: spacing.lg },
   input: {
     minHeight: minTouchTarget,
     borderRadius: borderRadius.md,
-    borderWidth: 1,
     paddingHorizontal: spacing.md,
     fontSize: fontSize.md,
     marginBottom: spacing.md,
