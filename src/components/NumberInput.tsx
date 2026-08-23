@@ -50,7 +50,7 @@ export function NumberInput({
             accessibilityLabel={`Decrease ${label}`}
             accessibilityRole="button"
           >
-            <Text style={[styles.stepperText, { color: theme.text }]}>{"−"}</Text>
+            <Text style={[styles.stepperText, { color: theme.text }]}>{'−'}</Text>
           </TouchableOpacity>
         )}
         <TextInput

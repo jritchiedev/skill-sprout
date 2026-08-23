@@ -28,23 +28,19 @@ export default function ReviewScreen() {
 
   const mode: Mode = (params.mode as Mode) || 'fluency';
 
-  // Fluency review state
   const [totalWords, setTotalWords] = useState(store.getEffectiveTotalWords());
   const [elapsedMs, setElapsedMs] = useState(store.getEffectiveElapsedMs());
   const [errorCount, setErrorCount] = useState(store.getEffectiveErrorCount());
   const [showResults, setShowResults] = useState(false);
 
-  // Running Record state
   const [rrTotalWords, setRrTotalWords] = useState(100);
   const [rrErrors, setRrErrors] = useState(0);
   const [rrSelfCorrections, setRrSelfCorrections] = useState(0);
   const [rrShowResults, setRrShowResults] = useState(false);
 
-  // Grader state
   const [graderTotal, setGraderTotal] = useState(20);
   const [graderIncorrect, setGraderIncorrect] = useState(0);
 
-  // Fluency calculations
   const fluencyResults = useMemo(() => {
     if (!showResults) return null;
     const wordsCorrect = calculateWordsCorrect(totalWords, errorCount);
@@ -91,7 +87,6 @@ export default function ReviewScreen() {
     setElapsedMs((currentMins * 60 + secs) * 1000);
   }
 
-  // Running Record calculations
   const rrResults = useMemo(() => {
     if (!rrShowResults) return null;
     const accuracy = calculateRunningRecordAccuracy(rrTotalWords, rrErrors);
@@ -99,7 +94,6 @@ export default function ReviewScreen() {
     return { accuracy, scRatio };
   }, [rrShowResults, rrTotalWords, rrErrors, rrSelfCorrections]);
 
-  // Grader calculations (always live)
   const graderResults = useMemo(() => {
     if (graderTotal <= 0) return { correct: 0, percentage: 0 };
     const correct = Math.max(0, graderTotal - graderIncorrect);
@@ -133,7 +127,7 @@ export default function ReviewScreen() {
           />
 
           {rrResults && (
-            <View style={[styles.resultsCard, { backgroundColor: theme.surface, borderColor: theme.border }]}>
+            <View style={[styles.resultsCard, { backgroundColor: theme.surface }]}>
               <View style={styles.statsRow}>
                 <StatBox label="Accuracy" value={`${rrResults.accuracy.toFixed(1)}%`} highlight />
                 <View style={{ width: spacing.sm }} />
@@ -175,7 +169,7 @@ export default function ReviewScreen() {
           />
 
           {graderTotal > 0 && (
-            <View style={[styles.resultsCard, { backgroundColor: theme.surface, borderColor: theme.border }]}>
+            <View style={[styles.resultsCard, { backgroundColor: theme.surface }]}>
               <View style={styles.statsRow}>
                 <StatBox
                   label="Score"
@@ -195,7 +189,6 @@ export default function ReviewScreen() {
     );
   }
 
-  // Fluency review mode
   const elapsedMinutes = Math.floor(elapsedMs / 60000);
   const elapsedSeconds = Math.floor((elapsedMs / 1000) % 60);
 
@@ -216,7 +209,7 @@ export default function ReviewScreen() {
           <View style={styles.timeInput}>
             <NumberInput label="Minutes" value={elapsedMinutes} onChange={(v) => { handleSetElapsedMinutes(v); setShowResults(false); }} />
           </View>
-          <Text style={[styles.timeColon, { color: theme.text }]}>:</Text>
+          <Text style={[styles.timeColon, { color: theme.textTertiary }]}>:</Text>
           <View style={styles.timeInput}>
             <NumberInput label="Seconds" value={elapsedSeconds} onChange={(v) => { handleSetElapsedSeconds(Math.min(59, v)); setShowResults(false); }} max={59} />
           </View>
@@ -238,7 +231,7 @@ export default function ReviewScreen() {
         )}
 
         {fluencyResults && (
-          <View style={[styles.resultsCard, { backgroundColor: theme.surface, borderColor: theme.border }]}>
+          <View style={[styles.resultsCard, { backgroundColor: theme.surface }]}>
             <View style={styles.statsRow}>
               <StatBox label="WPM" value={fluencyResults.wpm} highlight />
               <View style={{ width: spacing.sm }} />
@@ -274,16 +267,15 @@ export default function ReviewScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  content: { padding: spacing.md, paddingBottom: spacing.xxl },
+  content: { padding: spacing.lg, paddingBottom: spacing.xxl },
   title: { fontSize: fontSize.xxl, fontWeight: '700', marginBottom: spacing.xs },
   subtitle: { fontSize: fontSize.md, marginBottom: spacing.lg },
   fieldLabel: { fontSize: fontSize.sm, fontWeight: '500', marginBottom: spacing.xs },
   timeRow: { flexDirection: 'row', alignItems: 'flex-start' },
   timeInput: { flex: 1 },
-  timeColon: { fontSize: fontSize.xxl, fontWeight: '600', marginHorizontal: spacing.sm, marginTop: 20 },
+  timeColon: { fontSize: fontSize.xxl, fontWeight: '300', marginHorizontal: spacing.sm, marginTop: 20 },
   resultsCard: {
     borderRadius: borderRadius.lg,
-    borderWidth: 1,
     padding: spacing.md,
     marginTop: spacing.lg,
   },

@@ -1,10 +1,14 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { useColorScheme, Text, StyleSheet } from 'react-native';
+import { useColorScheme, Text, StyleSheet, View } from 'react-native';
 import { lightTheme, darkTheme } from '@/src/theme';
 
-function TabIcon({ icon, focused }: { icon: string; focused: boolean; color: unknown }) {
-  return <Text style={[styles.icon, { opacity: focused ? 1 : 0.7 }]}>{icon}</Text>;
+function TabIcon({ icon, focused, color }: { icon: string; focused: boolean; color: string }) {
+  return (
+    <View style={styles.iconWrap}>
+      <Text style={[styles.icon, { opacity: focused ? 1 : 0.5 }]}>{icon}</Text>
+    </View>
+  );
 }
 
 export default function TabLayout() {
@@ -19,38 +23,45 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: theme.tabBar,
           borderTopColor: theme.tabBarBorder,
+          borderTopWidth: 0.5,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: '500',
+          letterSpacing: 0.1,
         },
         headerStyle: { backgroundColor: theme.background },
         headerTintColor: theme.text,
         headerTitleStyle: { fontWeight: '600' },
+        headerShadowVisible: false,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="🏠" color={color} focused={focused} />,
+          tabBarIcon: ({ color, focused }) => <TabIcon icon="🌱" color={color} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="students"
         options={{
           title: 'Students',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="👤" color={color} focused={focused} />,
+          tabBarIcon: ({ color, focused }) => <TabIcon icon="👥" color={color} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="history"
         options={{
           title: 'History',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="📊" color={color} focused={focused} />,
+          tabBarIcon: ({ color, focused }) => <TabIcon icon="📈" color={color} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="more"
         options={{
           title: 'More',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="⚙️" color={color} focused={focused} />,
+          tabBarIcon: ({ color, focused }) => <TabIcon icon="···" color={color} focused={focused} />,
         }}
       />
     </Tabs>
@@ -58,5 +69,10 @@ export default function TabLayout() {
 }
 
 const styles = StyleSheet.create({
-  icon: { fontSize: 22 },
+  iconWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 24,
+  },
+  icon: { fontSize: 20 },
 });
