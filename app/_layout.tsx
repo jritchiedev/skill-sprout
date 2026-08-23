@@ -42,7 +42,7 @@ export default function RootLayout() {
           headerBackTitleVisible: false,
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, headerBackTitle: 'Home' }} />
         <Stack.Screen
           name="fluency/session"
           options={{ headerShown: false, gestureEnabled: false }}

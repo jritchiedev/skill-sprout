@@ -107,16 +107,24 @@ export default function ManagePassagesScreen() {
           <TouchableOpacity
             style={[styles.row, shadow.sm, { backgroundColor: theme.card }]}
             onPress={() => openEdit(item)}
-            onLongPress={() => handleDelete(item)}
             activeOpacity={0.7}
-            accessibilityHint="Tap to edit, hold to delete"
+            accessibilityHint="Tap to edit"
           >
-            <View>
+            <View style={styles.rowContent}>
               <Text style={[styles.rowTitle, { color: theme.text }]}>{item.title}</Text>
               <Text style={[styles.rowWords, { color: theme.textSecondary }]}>
                 {item.wordCount} words
               </Text>
             </View>
+            <TouchableOpacity
+              onPress={() => handleDelete(item)}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              style={styles.deleteBtn}
+              accessibilityRole="button"
+              accessibilityLabel={`Delete ${item.title}`}
+            >
+              <Text style={[styles.deleteBtnText, { color: theme.textTertiary }]}>×</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         )}
         ListFooterComponent={
@@ -173,12 +181,23 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   list: { padding: spacing.lg },
   row: {
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: spacing.md,
     borderRadius: borderRadius.lg,
     marginBottom: spacing.sm,
   },
+  rowContent: { flex: 1 },
   rowTitle: { fontSize: fontSize.md, fontWeight: '600' },
   rowWords: { fontSize: fontSize.sm, marginTop: 2 },
+  deleteBtn: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: spacing.sm,
+  },
+  deleteBtnText: { fontSize: 22, fontWeight: '300', lineHeight: 24 },
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
