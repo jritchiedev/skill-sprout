@@ -124,7 +124,11 @@ export default function ManagePassagesScreen() {
       />
 
       <Modal visible={showForm} animationType="slide" transparent>
-        <View style={styles.modalOverlay}>
+        <KeyboardAvoidingView
+          style={styles.modalOverlay}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
+          <View style={styles.modalOverlayFill} />
           <View style={[styles.modalContent, { backgroundColor: theme.background, borderColor: theme.border }]}>
             <Text style={[styles.modalTitle, { color: theme.text }]}>
               {editingId ? 'Edit Passage' : 'New Passage'}
@@ -143,6 +147,8 @@ export default function ManagePassagesScreen() {
               value={wordCountText}
               onChangeText={setWordCountText}
               keyboardType="number-pad"
+              returnKeyType="done"
+              onSubmitEditing={handleSave}
               style={[styles.input, { color: theme.text, backgroundColor: theme.surface, borderColor: theme.border }]}
             />
             <View style={styles.modalActions}>
@@ -155,7 +161,7 @@ export default function ManagePassagesScreen() {
               <Button title="Save" onPress={handleSave} style={{ flex: 1 }} />
             </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
     </KeyboardAvoidingView>
   );
@@ -174,8 +180,10 @@ const styles = StyleSheet.create({
   rowWords: { fontSize: fontSize.sm, marginTop: 2 },
   modalOverlay: {
     flex: 1,
-    justifyContent: 'flex-end',
     backgroundColor: 'rgba(0,0,0,0.4)',
+  },
+  modalOverlayFill: {
+    flex: 1,
   },
   modalContent: {
     borderTopLeftRadius: borderRadius.xl,
