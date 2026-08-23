@@ -35,9 +35,11 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerStyle: { backgroundColor: theme.background },
-          headerTintColor: theme.text,
-          headerTitleStyle: { fontWeight: '600' },
+          headerTintColor: theme.primary,
+          headerTitleStyle: { fontWeight: '600', color: theme.text },
+          headerShadowVisible: false,
           contentStyle: { backgroundColor: theme.background },
+          headerBackTitleVisible: false,
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -47,7 +49,7 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="fluency/review"
-          options={{ title: 'Review Results' }}
+          options={{ title: 'Review' }}
         />
         <Stack.Screen
           name="fluency/results"
@@ -55,7 +57,7 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="students/[id]"
-          options={{ title: 'Student' }}
+          options={{ title: '' }}
         />
         <Stack.Screen
           name="passages/manage"
@@ -63,7 +65,7 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="privacy"
-          options={{ title: 'Privacy Policy' }}
+          options={{ title: 'Privacy' }}
         />
       </Stack>
     </>

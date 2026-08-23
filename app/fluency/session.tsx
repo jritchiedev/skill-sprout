@@ -32,7 +32,7 @@ export default function FluencySessionScreen() {
   function confirmAbandon() {
     Alert.alert(
       'Stop Reading?',
-      'Are you sure you want to abandon this reading session?',
+      'Are you sure you want to stop this session?',
       [
         { text: 'Keep Reading', style: 'cancel' },
         {
@@ -81,11 +81,12 @@ export default function FluencySessionScreen() {
             onPress={isRunning ? confirmAbandon : () => { store.reset(); router.back(); }}
             style={styles.backBtn}
             accessibilityLabel="Back"
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
-            <Text style={[styles.backText, { color: theme.textSecondary }]}>← Back</Text>
+            <Text style={[styles.backText, { color: theme.primary }]}>{'‹ Back'}</Text>
           </TouchableOpacity>
           <View style={styles.infoChip}>
-            <Text style={[styles.infoText, { color: theme.textSecondary }]} numberOfLines={1}>
+            <Text style={[styles.infoText, { color: theme.textTertiary }]} numberOfLines={1}>
               {store.passageTitle} · {store.totalWords} words
             </Text>
           </View>
@@ -95,6 +96,9 @@ export default function FluencySessionScreen() {
           <Text style={[styles.timer, { color: theme.text }]} accessibilityLabel="Elapsed time">
             {formatTimeWithTenths(elapsed)}
           </Text>
+          {isRunning && (
+            <View style={[styles.liveDot, { backgroundColor: theme.error }]} />
+          )}
         </View>
 
         {isRunning ? (
@@ -106,7 +110,7 @@ export default function FluencySessionScreen() {
               accessibilityRole="button"
               accessibilityLabel={`Mark error. Current errors: ${errorCount}`}
             >
-              <Text style={[styles.errorButtonText, { color: theme.errorText }]}>ERROR</Text>
+              <Text style={[styles.errorButtonText, { color: theme.errorText }]}>Error</Text>
             </TouchableOpacity>
 
             <View style={styles.errorRow}>
@@ -116,7 +120,7 @@ export default function FluencySessionScreen() {
               {errorCount > 0 && (
                 <TouchableOpacity
                   onPress={handleUndo}
-                  style={[styles.undoButton, { borderColor: theme.border }]}
+                  style={[styles.undoButton, { backgroundColor: theme.surface }]}
                   accessibilityRole="button"
                   accessibilityLabel="Undo last error"
                 >
@@ -126,7 +130,7 @@ export default function FluencySessionScreen() {
             </View>
 
             <TouchableOpacity
-              style={[styles.stopButton, { backgroundColor: theme.surface, borderColor: theme.border }]}
+              style={[styles.stopButton, { backgroundColor: theme.surface }]}
               onPress={handleStop}
               activeOpacity={0.7}
               accessibilityRole="button"
@@ -138,7 +142,7 @@ export default function FluencySessionScreen() {
         ) : (
           <>
             <View style={styles.readyMessage}>
-              <Text style={[styles.readyTitle, { color: theme.text }]}>Ready?</Text>
+              <Text style={[styles.readyTitle, { color: theme.text }]}>Ready</Text>
               <Text style={[styles.readySubtitle, { color: theme.textSecondary }]}>
                 Tap Start when the student begins reading aloud
               </Text>
@@ -162,17 +166,18 @@ export default function FluencySessionScreen() {
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  container: { flex: 1, padding: spacing.md, justifyContent: 'space-between' },
+  container: { flex: 1, padding: spacing.lg, justifyContent: 'space-between' },
   topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   backBtn: { padding: spacing.sm },
   backText: { fontSize: fontSize.md, fontWeight: '500' },
   infoChip: { flex: 1, alignItems: 'flex-end', marginLeft: spacing.sm },
   infoText: { fontSize: fontSize.sm },
   timerSection: { alignItems: 'center', paddingVertical: spacing.lg },
-  timer: { fontSize: 64, fontWeight: '200', fontVariant: ['tabular-nums'] },
-  readyMessage: { alignItems: 'center', paddingHorizontal: spacing.lg },
-  readyTitle: { fontSize: fontSize.xxl, fontWeight: '700', marginBottom: spacing.sm },
-  readySubtitle: { fontSize: fontSize.md, textAlign: 'center' },
+  timer: { fontSize: 64, fontWeight: '200', fontVariant: ['tabular-nums'], letterSpacing: -1 },
+  liveDot: { width: 8, height: 8, borderRadius: 4, marginTop: spacing.sm },
+  readyMessage: { alignItems: 'center', paddingHorizontal: spacing.xl },
+  readyTitle: { fontSize: fontSize.xxxl, fontWeight: '700', marginBottom: spacing.sm },
+  readySubtitle: { fontSize: fontSize.md, textAlign: 'center', lineHeight: 22 },
   startButton: {
     height: 160,
     borderRadius: borderRadius.xl,
@@ -181,7 +186,7 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.md,
     marginBottom: spacing.md,
   },
-  startButtonText: { fontSize: 36, fontWeight: '800', letterSpacing: 2 },
+  startButtonText: { fontSize: 36, fontWeight: '700', letterSpacing: 1 },
   errorButton: {
     height: 160,
     borderRadius: borderRadius.xl,
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: spacing.md,
   },
-  errorButtonText: { fontSize: 36, fontWeight: '800', letterSpacing: 2 },
+  errorButtonText: { fontSize: 36, fontWeight: '700', letterSpacing: 1 },
   errorRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -197,18 +202,16 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.lg,
     gap: spacing.md,
   },
-  errorCount: { fontSize: fontSize.xl, fontWeight: '600' },
+  errorCount: { fontSize: fontSize.xl, fontWeight: '600', fontVariant: ['tabular-nums'] },
   undoButton: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: borderRadius.full,
-    borderWidth: 1,
   },
   undoText: { fontSize: fontSize.sm, fontWeight: '500' },
   stopButton: {
     minHeight: 52,
     borderRadius: borderRadius.md,
-    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,

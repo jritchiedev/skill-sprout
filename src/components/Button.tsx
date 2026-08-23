@@ -49,15 +49,14 @@ export function Button({
     ghost: theme.primary,
   }[variant];
 
-  const borderColor = variant === 'secondary' ? theme.border : 'transparent';
-
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled || loading}
       style={[
         styles.button,
-        { backgroundColor: bgColor, borderColor, opacity: disabled ? 0.5 : 1 },
+        { backgroundColor: bgColor, opacity: disabled ? 0.5 : 1 },
+        variant === 'secondary' && { borderWidth: 1, borderColor: theme.border },
         style,
       ]}
       accessibilityRole="button"
@@ -82,10 +81,10 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm + 2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
   },
   text: {
     fontSize: fontSize.md,
     fontWeight: '600',
+    letterSpacing: 0.2,
   },
 });

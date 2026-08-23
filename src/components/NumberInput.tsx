@@ -46,11 +46,11 @@ export function NumberInput({
         {showStepper && (
           <TouchableOpacity
             onPress={() => onChange(clamp(value - 1))}
-            style={[styles.stepper, { backgroundColor: theme.surface, borderColor: theme.border }]}
+            style={[styles.stepper, { backgroundColor: theme.surface }]}
             accessibilityLabel={`Decrease ${label}`}
             accessibilityRole="button"
           >
-            <Text style={[styles.stepperText, { color: theme.text }]}>−</Text>
+            <Text style={[styles.stepperText, { color: theme.text }]}>{'−'}</Text>
           </TouchableOpacity>
         )}
         <TextInput
@@ -62,7 +62,6 @@ export function NumberInput({
             {
               color: theme.text,
               backgroundColor: theme.surface,
-              borderColor: theme.border,
             },
           ]}
           accessibilityLabel={accessibilityLabel ?? label}
@@ -71,7 +70,7 @@ export function NumberInput({
         {showStepper && (
           <TouchableOpacity
             onPress={() => onChange(clamp(value + 1))}
-            style={[styles.stepper, { backgroundColor: theme.surface, borderColor: theme.border }]}
+            style={[styles.stepper, { backgroundColor: theme.surface }]}
             accessibilityLabel={`Increase ${label}`}
             accessibilityRole="button"
           >
@@ -95,12 +94,12 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: spacing.sm,
   },
   input: {
     flex: 1,
     minHeight: minTouchTarget,
     borderRadius: borderRadius.md,
-    borderWidth: 1,
     paddingHorizontal: spacing.md,
     fontSize: fontSize.lg,
     fontWeight: '600',
@@ -110,13 +109,11 @@ const styles = StyleSheet.create({
     width: minTouchTarget,
     height: minTouchTarget,
     borderRadius: borderRadius.md,
-    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: spacing.xs,
   },
   stepperText: {
     fontSize: fontSize.xl,
-    fontWeight: '600',
+    fontWeight: '500',
   },
 });

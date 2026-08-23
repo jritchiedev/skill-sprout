@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList, SectionList } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { useTheme } from '@/src/hooks/useTheme';
 import { getStudentById, getStudentPassageStats, getAttemptsByStudent } from '@/src/db';
@@ -7,7 +7,7 @@ import { Student, ReadingAttempt } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { StatBox } from '@/src/components/StatBox';
 import { formatTime } from '@/src/utils/calculations';
-import { spacing, fontSize, borderRadius } from '@/src/theme';
+import { spacing, fontSize, borderRadius, shadow } from '@/src/theme';
 import type { StudentPassageStats } from '@/src/db/attempts';
 
 export default function StudentDetailScreen() {
@@ -46,7 +46,7 @@ export default function StudentDetailScreen() {
           <Text style={styles.avatarText}>{student.name.charAt(0).toUpperCase()}</Text>
         </View>
         <Text style={[styles.name, { color: theme.text }]}>{student.name}</Text>
-        <Text style={[styles.sub, { color: theme.textSecondary }]}>
+        <Text style={[styles.sub, { color: theme.textTertiary }]}>
           {attempts.length} {attempts.length === 1 ? 'reading' : 'readings'}
         </Text>
       </View>
@@ -75,7 +75,7 @@ export default function StudentDetailScreen() {
           renderItem={({ item }) => {
             const improvement = item.latestWpm - item.firstWpm;
             return (
-              <View style={[styles.passageCard, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
+              <View style={[styles.passageCard, shadow.sm, { backgroundColor: theme.card }]}>
                 <Text style={[styles.passageTitle, { color: theme.text }]}>
                   {item.passageTitle || 'Untitled'}
                 </Text>
@@ -93,7 +93,7 @@ export default function StudentDetailScreen() {
                     <Text
                       style={[
                         styles.passStat,
-                        { color: improvement >= 0 ? theme.success : theme.error },
+                        { color: improvement >= 0 ? theme.success : theme.error, fontWeight: '600' },
                       ]}
                     >
                       {improvement >= 0 ? '+' : ''}{Math.round(improvement)} WPM
@@ -123,15 +123,14 @@ const styles = StyleSheet.create({
   avatarText: { color: '#FFF', fontSize: 28, fontWeight: '700' },
   name: { fontSize: fontSize.xxl, fontWeight: '700' },
   sub: { fontSize: fontSize.md, marginTop: spacing.xs },
-  summaryRow: { flexDirection: 'row', paddingHorizontal: spacing.md, marginBottom: spacing.md },
-  listContent: { padding: spacing.md },
+  summaryRow: { flexDirection: 'row', paddingHorizontal: spacing.lg, marginBottom: spacing.md },
+  listContent: { padding: spacing.lg },
   passageCard: {
     borderRadius: borderRadius.lg,
-    borderWidth: 1,
     padding: spacing.md,
     marginBottom: spacing.sm,
   },
-  passageTitle: { fontSize: fontSize.lg, fontWeight: '600', marginBottom: spacing.xs },
+  passageTitle: { fontSize: fontSize.md, fontWeight: '600', marginBottom: spacing.xs },
   passageStats: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   passStat: { fontSize: fontSize.sm },
 });

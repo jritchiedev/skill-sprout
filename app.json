@@ -1,29 +1,29 @@
 {
   "expo": {
-    "name": "PencilBox",
-    "slug": "pencilbox",
+    "name": "Skill Sprout",
+    "slug": "skillsprout",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "pencilbox",
+    "scheme": "skillsprout",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.pencilbox.app",
+      "bundleIdentifier": "com.skillsprout.app",
       "buildNumber": "1",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "PencilBox does not currently use the microphone, but future versions may support audio recording for reading assessments."
+        "NSMicrophoneUsageDescription": "Skill Sprout does not currently use the microphone, but future versions may support audio recording for reading assessments."
       }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#2563EB",
+        "backgroundColor": "#059669",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "package": "com.pencilbox.app",
+      "package": "com.skillsprout.app",
       "versionCode": 1
     },
     "web": {
@@ -38,7 +38,7 @@
         {
           "image": "./assets/images/splash-icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#2563EB"
+          "backgroundColor": "#059669"
         }
       ],
       "expo-sqlite"

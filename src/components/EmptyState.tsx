@@ -14,8 +14,8 @@ export function EmptyState({ icon, title, message }: EmptyStateProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.icon}>{icon}</Text>
-      <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
-      <Text style={[styles.message, { color: theme.textSecondary }]}>{message}</Text>
+      <Text style={[styles.title, { color: theme.textSecondary }]}>{title}</Text>
+      <Text style={[styles.message, { color: theme.textTertiary }]}>{message}</Text>
     </View>
   );
 }
@@ -24,17 +24,18 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.xxl,
-    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.xxl * 1.5,
+    paddingHorizontal: spacing.xl,
   },
   icon: {
-    fontSize: 48,
+    fontSize: 44,
     marginBottom: spacing.md,
+    opacity: 0.8,
   },
   title: {
     fontSize: fontSize.lg,
     fontWeight: '600',
-    marginBottom: spacing.xs,
+    marginBottom: spacing.sm,
     textAlign: 'center',
   },
   message: {
