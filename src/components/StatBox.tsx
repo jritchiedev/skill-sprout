@@ -28,12 +28,15 @@ export function StatBox({ label, value, unit, highlight }: StatBoxProps) {
             styles.value,
             { color: highlight ? theme.primary : theme.text },
           ]}
+          numberOfLines={1}
+          adjustsFontSizeToFit
+          minimumFontScale={0.6}
         >
           {value}
+          {unit ? (
+            <Text style={[styles.unit, { color: theme.textSecondary }]}> {unit}</Text>
+          ) : null}
         </Text>
-        {unit ? (
-          <Text style={[styles.unit, { color: theme.textSecondary }]}>{unit}</Text>
-        ) : null}
       </View>
     </View>
   );
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   value: {
-    fontSize: fontSize.xxl,
+    fontSize: fontSize.xl,
     fontWeight: '700',
     fontVariant: ['tabular-nums'],
   },

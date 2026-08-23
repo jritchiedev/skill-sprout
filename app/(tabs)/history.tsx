@@ -37,24 +37,24 @@ export default function HistoryTab() {
 
         <View style={styles.cardStats}>
           <View style={styles.stat}>
-            <Text style={[styles.statValue, { color: theme.primary }]}>{Math.round(item.wpm)}</Text>
+            <Text style={[styles.statValue, { color: theme.primary }]} numberOfLines={1} adjustsFontSizeToFit>{Math.round(item.wpm)}</Text>
             <Text style={[styles.statLabel, { color: theme.textTertiary }]}>WPM</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: theme.separator }]} />
           <View style={styles.stat}>
-            <Text style={[styles.statValue, { color: theme.text }]}>{item.accuracy.toFixed(1)}%</Text>
+            <Text style={[styles.statValue, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>{item.accuracy.toFixed(1)}%</Text>
             <Text style={[styles.statLabel, { color: theme.textTertiary }]}>Accuracy</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: theme.separator }]} />
           <View style={styles.stat}>
-            <Text style={[styles.statValue, { color: theme.text }]}>
+            <Text style={[styles.statValue, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>
               {item.wordsCorrect}/{item.totalWords}
             </Text>
             <Text style={[styles.statLabel, { color: theme.textTertiary }]}>Correct</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: theme.separator }]} />
           <View style={styles.stat}>
-            <Text style={[styles.statValue, { color: theme.text }]}>{formatTime(item.elapsedMilliseconds)}</Text>
+            <Text style={[styles.statValue, { color: theme.text }]} numberOfLines={1} adjustsFontSizeToFit>{formatTime(item.elapsedMilliseconds)}</Text>
             <Text style={[styles.statLabel, { color: theme.textTertiary }]}>Time</Text>
           </View>
         </View>
