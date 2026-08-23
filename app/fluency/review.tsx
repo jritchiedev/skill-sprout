@@ -238,11 +238,14 @@ export default function ReviewScreen() {
               <StatBox label="Accuracy" value={`${fluencyResults.accuracy.toFixed(1)}%`} />
             </View>
             <View style={styles.statsRow}>
-              <StatBox label="Words Correct" value={`${fluencyResults.wordsCorrect}/${totalWords}`} />
-              <View style={{ width: spacing.sm }} />
-              <StatBox label="Time" value={formatTime(elapsedMs)} />
+              <StatBox label="Correct" value={`${fluencyResults.wordsCorrect}/${totalWords}`} />
               <View style={{ width: spacing.sm }} />
               <StatBox label="Errors" value={errorCount} />
+            </View>
+            <View style={styles.statsRow}>
+              <StatBox label="Time" value={formatTime(elapsedMs)} />
+              <View style={{ width: spacing.sm }} />
+              <View style={{ flex: 1 }} />
             </View>
 
             <View style={styles.actionRow}>
