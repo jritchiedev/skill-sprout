@@ -82,7 +82,7 @@ export default function ResultsScreen() {
 
         <View style={[styles.statsCard, { backgroundColor: theme.surface }]}>
           <View style={styles.statsRow}>
-            <StatBox label="Words Correct" value={`${wordsCorrect}/${totalWords}`} />
+            <StatBox label="Correct" value={`${wordsCorrect}/${totalWords}`} />
             <View style={{ width: spacing.sm }} />
             <StatBox label="Accuracy" value={`${accuracy.toFixed(1)}%`} />
           </View>

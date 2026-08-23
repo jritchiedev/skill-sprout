@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity, TextInput, Alert,
   ScrollView, KeyboardAvoidingView, Platform,
@@ -155,54 +155,84 @@ export default function HomeScreen() {
                 </>
               )}
 
-              {passages.length > 0 && (
-                <>
-                  <Text style={[styles.setupLabel, { color: theme.textSecondary, marginTop: spacing.md }]}>
-                    Passage
-                  </Text>
-                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipScroll}>
+              <View style={styles.setupLabelRow}>
+                <Text style={[styles.setupLabel, { color: theme.textSecondary, marginTop: spacing.md, marginBottom: 0 }]}>
+                  Passage
+                </Text>
+                {passages.length > 0 && (
+                  <TouchableOpacity
+                    onPress={() => router.push('/passages/manage')}
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                    style={{ marginTop: spacing.md }}
+                  >
+                    <Text style={[styles.manageLink, { color: theme.primary }]}>Manage</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+
+              {passages.length > 0 ? (
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipScroll}>
+                  <TouchableOpacity
+                    style={[
+                      styles.chip,
+                      {
+                        backgroundColor: !selectedPassageId ? theme.primary : theme.surfaceElevated,
+                        borderColor: !selectedPassageId ? theme.primary : theme.border,
+                      },
+                    ]}
+                    onPress={() => {
+                      setSelectedPassageId(null);
+                      setPassageNameText('');
+                      setWordCountText('');
+                    }}
+                  >
+                    <Text style={[styles.chipText, { color: !selectedPassageId ? theme.primaryText : theme.textSecondary }]}>
+                      Custom
+                    </Text>
+                  </TouchableOpacity>
+                  {passages.map((p) => (
                     <TouchableOpacity
+                      key={p.id}
                       style={[
                         styles.chip,
                         {
-                          backgroundColor: !selectedPassageId ? theme.primary : theme.surfaceElevated,
-                          borderColor: !selectedPassageId ? theme.primary : theme.border,
+                          backgroundColor: selectedPassageId === p.id ? theme.primary : theme.surfaceElevated,
+                          borderColor: selectedPassageId === p.id ? theme.primary : theme.border,
                         },
                       ]}
-                      onPress={() => {
-                        setSelectedPassageId(null);
-                        setPassageNameText('');
-                        setWordCountText('');
-                      }}
+                      onPress={() => handleSelectPassage(p)}
                     >
-                      <Text style={[styles.chipText, { color: !selectedPassageId ? theme.primaryText : theme.textSecondary }]}>
-                        Custom
+                      <Text
+                        style={[
+                          styles.chipText,
+                          { color: selectedPassageId === p.id ? theme.primaryText : theme.text },
+                        ]}
+                      >
+                        {p.title}
                       </Text>
                     </TouchableOpacity>
-                    {passages.map((p) => (
-                      <TouchableOpacity
-                        key={p.id}
-                        style={[
-                          styles.chip,
-                          {
-                            backgroundColor: selectedPassageId === p.id ? theme.primary : theme.surfaceElevated,
-                            borderColor: selectedPassageId === p.id ? theme.primary : theme.border,
-                          },
-                        ]}
-                        onPress={() => handleSelectPassage(p)}
-                      >
-                        <Text
-                          style={[
-                            styles.chipText,
-                            { color: selectedPassageId === p.id ? theme.primaryText : theme.text },
-                          ]}
-                        >
-                          {p.title}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                </>
+                  ))}
+                  <TouchableOpacity
+                    style={[
+                      styles.chip,
+                      { backgroundColor: theme.surfaceElevated, borderColor: theme.border, borderStyle: 'dashed' },
+                    ]}
+                    onPress={() => router.push('/passages/manage')}
+                  >
+                    <Text style={[styles.chipText, { color: theme.textTertiary }]}>+ Add</Text>
+                  </TouchableOpacity>
+                </ScrollView>
+              ) : (
+                <TouchableOpacity
+                  style={[styles.addPassagePrompt, { backgroundColor: theme.surfaceElevated }]}
+                  onPress={() => router.push('/passages/manage')}
+                  activeOpacity={0.7}
+                >
+                  <Text style={[styles.addPassageText, { color: theme.textSecondary }]}>
+                    Save passages with word counts for quick reuse
+                  </Text>
+                  <Text style={[styles.addPassageAction, { color: theme.primary }]}>Add Passages</Text>
+                </TouchableOpacity>
               )}
 
               {!selectedPassageId && (
@@ -367,4 +397,19 @@ const styles = StyleSheet.create({
     marginTop: spacing.lg,
   },
   startButtonText: { fontSize: fontSize.lg, fontWeight: '700', letterSpacing: 0.3 },
+  setupLabelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.xs,
+  },
+  manageLink: { fontSize: fontSize.sm, fontWeight: '500' },
+  addPassagePrompt: {
+    borderRadius: borderRadius.md,
+    padding: spacing.md,
+    marginTop: spacing.xs,
+    alignItems: 'center',
+  },
+  addPassageText: { fontSize: fontSize.sm, textAlign: 'center', marginBottom: spacing.xs },
+  addPassageAction: { fontSize: fontSize.sm, fontWeight: '600' },
 });
