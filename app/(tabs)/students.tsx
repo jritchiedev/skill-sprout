@@ -8,6 +8,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { getAllStudents, createStudent, deleteStudent, getStudentAttemptCount } from '@/src/db';
 import { Student } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
+import { deleteStudentMessage } from '@/src/utils/messages';
 import { spacing, fontSize, borderRadius, minTouchTarget, shadow } from '@/src/theme';
 
 export default function StudentsTab() {
@@ -42,9 +43,7 @@ export default function StudentsTab() {
 
   async function handleDelete(student: Student) {
     const count = await getStudentAttemptCount(student.id);
-    const message = count > 0
-      ? `"${student.name}" has ${count} reading ${count === 1 ? 'attempt' : 'attempts'}. Deleting will disassociate those records.`
-      : `Delete "${student.name}"?`;
+    const message = deleteStudentMessage(student.name, count);
 
     Alert.alert('Delete Student', message, [
       { text: 'Cancel', style: 'cancel' },

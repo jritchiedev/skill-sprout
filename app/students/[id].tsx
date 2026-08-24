@@ -7,6 +7,7 @@ import { Student, ReadingAttempt } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { StatBox } from '@/src/components/StatBox';
 import { formatTime } from '@/src/utils/calculations';
+import { deleteStudentMessage } from '@/src/utils/messages';
 import { spacing, fontSize, borderRadius, shadow } from '@/src/theme';
 import type { StudentPassageStats } from '@/src/db/attempts';
 
@@ -38,9 +39,7 @@ export default function StudentDetailScreen() {
   async function handleDelete() {
     if (!student || !id) return;
     const count = await getStudentAttemptCount(id);
-    const message = count > 0
-      ? `"${student.name}" has ${count} reading ${count === 1 ? 'attempt' : 'attempts'}. Deleting will disassociate those records.`
-      : `Delete "${student.name}"?`;
+    const message = deleteStudentMessage(student.name, count);
 
     Alert.alert('Delete Student', message, [
       { text: 'Cancel', style: 'cancel' },

@@ -46,6 +46,11 @@ export async function updateStudent(id: string, name: string): Promise<void> {
   );
 }
 
+/**
+ * Deletes a student along with every reading attempt recorded for them, and the
+ * error events belonging to those attempts. Both are removed by the ON DELETE
+ * CASCADE chain in the schema, which requires `PRAGMA foreign_keys = ON`.
+ */
 export async function deleteStudent(id: string): Promise<void> {
   const db = await getDatabase();
   await db.runAsync('DELETE FROM students WHERE id = ?', [id]);

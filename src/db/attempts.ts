@@ -1,5 +1,5 @@
 import { getDatabase } from './database';
-import { ReadingAttempt, ErrorEvent } from '@/src/types/models';
+import { ReadingAttempt } from '@/src/types/models';
 import { generateId } from '@/src/utils/uuid';
 
 function mapAttemptRow(row: any): ReadingAttempt {
@@ -28,36 +28,38 @@ export async function saveReadingAttempt(
   const db = await getDatabase();
   const now = new Date().toISOString();
 
-  await db.runAsync(
-    `INSERT INTO reading_attempts
-     (id, student_id, passage_id, passage_title_snapshot, total_words, elapsed_milliseconds,
-      error_count, words_correct, wpm, accuracy, started_at, completed_at, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      attempt.id,
-      attempt.studentId,
-      attempt.passageId,
-      attempt.passageTitleSnapshot,
-      attempt.totalWords,
-      attempt.elapsedMilliseconds,
-      attempt.errorCount,
-      attempt.wordsCorrect,
-      attempt.wpm,
-      attempt.accuracy,
-      attempt.startedAt,
-      attempt.completedAt,
-      now,
-      now,
-    ]
-  );
-
-  for (const event of errorEvents) {
-    const eventId = generateId();
+  // The attempt and its error events are one record -- never save half of it.
+  await db.withTransactionAsync(async () => {
     await db.runAsync(
-      'INSERT INTO error_events (id, reading_attempt_id, elapsed_milliseconds, created_at) VALUES (?, ?, ?, ?)',
-      [eventId, attempt.id, event.elapsedMilliseconds, now]
+      `INSERT INTO reading_attempts
+       (id, student_id, passage_id, passage_title_snapshot, total_words, elapsed_milliseconds,
+        error_count, words_correct, wpm, accuracy, started_at, completed_at, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        attempt.id,
+        attempt.studentId,
+        attempt.passageId,
+        attempt.passageTitleSnapshot,
+        attempt.totalWords,
+        attempt.elapsedMilliseconds,
+        attempt.errorCount,
+        attempt.wordsCorrect,
+        attempt.wpm,
+        attempt.accuracy,
+        attempt.startedAt,
+        attempt.completedAt,
+        now,
+        now,
+      ]
     );
-  }
+
+    for (const event of errorEvents) {
+      await db.runAsync(
+        'INSERT INTO error_events (id, reading_attempt_id, elapsed_milliseconds, created_at) VALUES (?, ?, ?, ?)',
+        [generateId(), attempt.id, event.elapsedMilliseconds, now]
+      );
+    }
+  });
 
   return { ...attempt, createdAt: now, updatedAt: now };
 }
@@ -100,9 +102,9 @@ export async function getRecentAttempts(limit: number = 20): Promise<ReadingAtte
   return rows.map(mapAttemptRow);
 }
 
+/** Deletes an attempt; its error events go with it via ON DELETE CASCADE. */
 export async function deleteAttempt(id: string): Promise<void> {
   const db = await getDatabase();
-  await db.runAsync('DELETE FROM error_events WHERE reading_attempt_id = ?', [id]);
   await db.runAsync('DELETE FROM reading_attempts WHERE id = ?', [id]);
 }
 

@@ -3,7 +3,7 @@ import { Tabs } from 'expo-router';
 import { useColorScheme, Text, StyleSheet, View } from 'react-native';
 import { lightTheme, darkTheme } from '@/src/theme';
 
-function TabIcon({ icon, focused, color }: { icon: string; focused: boolean; color: string }) {
+function TabIcon({ icon, focused }: { icon: string; focused: boolean }) {
   return (
     <View style={styles.iconWrap}>
       <Text style={[styles.icon, { opacity: focused ? 1 : 0.5 }]}>{icon}</Text>
@@ -40,28 +40,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="🌱" color={color} focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon icon="🌱" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="students"
         options={{
           title: 'Students',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="👥" color={color} focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon icon="👥" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="history"
         options={{
           title: 'History',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="📈" color={color} focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon icon="📈" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="more"
         options={{
           title: 'More',
-          tabBarIcon: ({ color, focused }) => <TabIcon icon="···" color={color} focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon icon="···" focused={focused} />,
         }}
       />
     </Tabs>
