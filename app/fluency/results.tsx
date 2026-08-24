@@ -10,7 +10,7 @@ import { StatBox } from '@/src/components/StatBox';
 import { saveReadingAttempt } from '@/src/db/attempts';
 import { formatTime } from '@/src/utils/calculations';
 import { generateId } from '@/src/utils/uuid';
-import { spacing, fontSize, borderRadius } from '@/src/theme';
+import { spacing, fontSize, borderRadius, typography } from '@/src/theme';
 
 export default function ResultsScreen() {
   const theme = useTheme();
@@ -80,7 +80,7 @@ export default function ResultsScreen() {
           </Text>
         ) : null}
 
-        <View style={[styles.statsCard, { backgroundColor: theme.surface }]}>
+        <View style={styles.statsCard}>
           <View style={styles.statsRow}>
             <StatBox label="Correct" value={`${wordsCorrect}/${totalWords}`} />
             <View style={{ width: spacing.sm }} />
@@ -114,13 +114,11 @@ export default function ResultsScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   content: { flex: 1, padding: spacing.lg, justifyContent: 'center' },
-  header: { alignItems: 'center', marginBottom: spacing.sm },
-  wpmValue: { fontSize: 72, fontWeight: '800', fontVariant: ['tabular-nums'] },
-  wpmLabel: { fontSize: fontSize.lg, fontWeight: '400' },
-  passageInfo: { fontSize: fontSize.md, textAlign: 'center', marginBottom: spacing.lg },
+  header: { alignItems: 'center', marginBottom: spacing.md },
+  wpmValue: { fontSize: 76, fontWeight: '700', ...typography.numeric, letterSpacing: -2.5 },
+  wpmLabel: { fontSize: fontSize.sm, fontWeight: '500', textTransform: 'uppercase', letterSpacing: 1.1, marginTop: spacing.xs },
+  passageInfo: { fontSize: fontSize.sm, textAlign: 'center', marginBottom: spacing.xl },
   statsCard: {
-    borderRadius: borderRadius.lg,
-    padding: spacing.md,
     marginBottom: spacing.xl,
   },
   statsRow: { flexDirection: 'row', marginBottom: spacing.sm },
@@ -131,5 +129,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  savedText: { fontSize: fontSize.lg, fontWeight: '600' },
+  savedText: { fontSize: fontSize.md, fontWeight: '600' },
 });

@@ -24,23 +24,24 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.xxl * 1.5,
+    paddingVertical: spacing.xxl,
     paddingHorizontal: spacing.xl,
   },
   icon: {
-    fontSize: 44,
+    fontSize: 36,
     marginBottom: spacing.md,
-    opacity: 0.8,
+    opacity: 0.5,
   },
   title: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.md,
     fontWeight: '600',
-    marginBottom: spacing.sm,
+    marginBottom: spacing.xs,
     textAlign: 'center',
   },
   message: {
-    fontSize: fontSize.md,
+    fontSize: fontSize.sm,
     textAlign: 'center',
-    lineHeight: 22,
+    lineHeight: 20,
+    maxWidth: 280,
   },
 });

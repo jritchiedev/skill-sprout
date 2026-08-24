@@ -3,13 +3,13 @@ import {
   View, Text, StyleSheet, FlatList, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView, Platform,
 } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
+import { ScreenHeader } from '@/src/components/ScreenHeader';
 import { getAllStudents, createStudent, deleteStudent, getStudentAttemptCount } from '@/src/db';
 import { Student } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { deleteStudentMessage } from '@/src/utils/messages';
-import { spacing, fontSize, borderRadius, minTouchTarget, shadow } from '@/src/theme';
+import { spacing, fontSize, borderRadius, typography, minTouchTarget, shadow } from '@/src/theme';
 
 export default function StudentsTab() {
   const theme = useTheme();
@@ -61,7 +61,7 @@ export default function StudentsTab() {
   function renderStudent({ item }: { item: Student }) {
     return (
       <TouchableOpacity
-        style={[styles.studentRow, shadow.sm, { backgroundColor: theme.card }]}
+        style={[styles.studentRow, shadow.sm, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
         onPress={() => router.push(`/students/${item.id}`)}
         activeOpacity={0.7}
         accessibilityRole="button"
@@ -88,7 +88,11 @@ export default function StudentsTab() {
   }
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]} edges={[]}>
+    <View style={[styles.safe, { backgroundColor: theme.background }]}>
+      <ScreenHeader
+        title="Students"
+        subtitle={students.length > 0 ? `${students.length} ${students.length === 1 ? 'student' : 'students'}` : undefined}
+      />
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={[styles.addRow]}>
           <TextInput
@@ -98,7 +102,7 @@ export default function StudentsTab() {
             onChangeText={setNewName}
             onSubmitEditing={handleAdd}
             returnKeyType="done"
-            style={[styles.addInput, { color: theme.text, backgroundColor: theme.surface }]}
+            style={[styles.addInput, { color: theme.text, backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             accessibilityLabel="New student name"
           />
           <TouchableOpacity
@@ -126,18 +130,19 @@ export default function StudentsTab() {
           }
         />
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   flex: { flex: 1 },
-  addRow: { flexDirection: 'row', padding: spacing.lg, paddingBottom: spacing.md, gap: spacing.sm },
+  addRow: { flexDirection: 'row', paddingHorizontal: spacing.lg, paddingBottom: spacing.md, gap: spacing.sm },
   addInput: {
     flex: 1,
     minHeight: minTouchTarget,
     borderRadius: borderRadius.md,
+    borderWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: spacing.md,
     fontSize: fontSize.md,
   },
@@ -149,25 +154,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButtonText: { fontSize: fontSize.md, fontWeight: '600' },
-  list: { paddingHorizontal: spacing.lg },
+  list: { paddingHorizontal: spacing.lg, paddingBottom: spacing.lg },
   studentRow: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: spacing.md,
     borderRadius: borderRadius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
     marginBottom: spacing.sm,
   },
   avatar: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: spacing.md,
   },
-  avatarText: { color: '#FFF', fontSize: fontSize.lg, fontWeight: '700' },
+  avatarText: { color: '#FFF', fontSize: fontSize.md, fontWeight: '600' },
   studentInfo: { flex: 1 },
-  studentName: { fontSize: fontSize.md, fontWeight: '500' },
+  studentName: { ...typography.cardTitle, fontWeight: '500' },
   deleteBtn: {
     width: 32,
     height: 32,

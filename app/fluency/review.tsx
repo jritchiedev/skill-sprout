@@ -127,7 +127,7 @@ export default function ReviewScreen() {
           />
 
           {rrResults && (
-            <View style={[styles.resultsCard, { backgroundColor: theme.surface }]}>
+            <View style={[styles.resultsCard, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
               <View style={styles.statsRow}>
                 <StatBox label="Accuracy" value={`${rrResults.accuracy.toFixed(1)}%`} highlight />
                 <View style={{ width: spacing.sm }} />
@@ -169,7 +169,7 @@ export default function ReviewScreen() {
           />
 
           {graderTotal > 0 && (
-            <View style={[styles.resultsCard, { backgroundColor: theme.surface }]}>
+            <View style={[styles.resultsCard, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
               <View style={styles.statsRow}>
                 <StatBox
                   label="Score"
@@ -231,7 +231,7 @@ export default function ReviewScreen() {
         )}
 
         {fluencyResults && (
-          <View style={[styles.resultsCard, { backgroundColor: theme.surface }]}>
+          <View style={[styles.resultsCard, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
             <View style={styles.statsRow}>
               <StatBox label="WPM" value={fluencyResults.wpm} highlight />
               <View style={{ width: spacing.sm }} />
@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
   timeColon: { fontSize: fontSize.xxl, fontWeight: '300', marginHorizontal: spacing.sm, marginTop: 20 },
   resultsCard: {
     borderRadius: borderRadius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
     padding: spacing.md,
     marginTop: spacing.lg,
   },

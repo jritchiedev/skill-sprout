@@ -9,7 +9,7 @@ import { getAllPassages, createPassage, updatePassage, deletePassage } from '@/s
 import { Passage } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { Button } from '@/src/components/Button';
-import { spacing, fontSize, borderRadius, minTouchTarget, shadow } from '@/src/theme';
+import { spacing, fontSize, borderRadius, typography, minTouchTarget, shadow } from '@/src/theme';
 
 export default function ManagePassagesScreen() {
   const theme = useTheme();
@@ -105,7 +105,7 @@ export default function ManagePassagesScreen() {
         }
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={[styles.row, shadow.sm, { backgroundColor: theme.card }]}
+            style={[styles.row, shadow.sm, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             onPress={() => openEdit(item)}
             activeOpacity={0.7}
             accessibilityHint="Tap to edit"
@@ -148,7 +148,7 @@ export default function ManagePassagesScreen() {
               placeholderTextColor={theme.textTertiary}
               value={titleText}
               onChangeText={setTitleText}
-              style={[styles.input, { color: theme.text, backgroundColor: theme.surface }]}
+              style={[styles.input, { color: theme.text, backgroundColor: theme.card, borderColor: theme.cardBorder }]}
               autoFocus
             />
             <TextInput
@@ -159,7 +159,7 @@ export default function ManagePassagesScreen() {
               keyboardType="number-pad"
               returnKeyType="done"
               onSubmitEditing={handleSave}
-              style={[styles.input, { color: theme.text, backgroundColor: theme.surface }]}
+              style={[styles.input, { color: theme.text, backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             />
             <View style={styles.modalActions}>
               <Button
@@ -185,10 +185,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: spacing.md,
     borderRadius: borderRadius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
     marginBottom: spacing.sm,
   },
   rowContent: { flex: 1 },
-  rowTitle: { fontSize: fontSize.md, fontWeight: '600' },
+  rowTitle: { ...typography.cardTitle },
   rowWords: { fontSize: fontSize.sm, marginTop: 2 },
   deleteBtn: {
     width: 32,
@@ -218,10 +219,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: spacing.lg,
   },
-  modalTitle: { fontSize: fontSize.xl, fontWeight: '700', marginBottom: spacing.lg },
+  modalTitle: { fontSize: fontSize.xl, fontWeight: '700', letterSpacing: -0.4, marginBottom: spacing.lg },
   input: {
     minHeight: minTouchTarget,
     borderRadius: borderRadius.md,
+    borderWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: spacing.md,
     fontSize: fontSize.md,
     marginBottom: spacing.md,

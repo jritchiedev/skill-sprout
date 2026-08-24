@@ -4,10 +4,10 @@ import {
   ScrollView, KeyboardAvoidingView, Platform,
 } from 'react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
+import { ScreenHeader } from '@/src/components/ScreenHeader';
 import { useFluencyStore } from '@/src/state/fluencyStore';
-import { spacing, fontSize, borderRadius, minTouchTarget, shadow } from '@/src/theme';
+import { spacing, fontSize, borderRadius, typography, minTouchTarget, shadow } from '@/src/theme';
 import { getAllStudents, getAllPassages } from '@/src/db';
 import { Student, Passage } from '@/src/types/models';
 
@@ -61,7 +61,8 @@ export default function HomeScreen() {
   }
 
   return (
-    <SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]} edges={['top']}>
+    <View style={[styles.safe, { backgroundColor: theme.background }]}>
+      <ScreenHeader title="Skill Sprout" subtitle="Tools for growing readers" />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -71,21 +72,15 @@ export default function HomeScreen() {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.header}>
-            <Text style={[styles.appName, { color: theme.text }]}>Skill Sprout</Text>
-            <Text style={[styles.tagline, { color: theme.textTertiary }]}>
-              Tools for growing readers
-            </Text>
-          </View>
-
           <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>Reading</Text>
 
           <TouchableOpacity
             style={[
               styles.toolCard,
-              shadow.md,
+              shadow.sm,
               {
-                backgroundColor: showSetup ? theme.primaryLight : theme.card,
+                backgroundColor: theme.card,
+                borderColor: showSetup ? theme.primary : theme.cardBorder,
               },
             ]}
             onPress={() => setShowSetup(!showSetup)}
@@ -110,7 +105,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
 
           {showSetup && (
-            <View style={[styles.setupSection, { backgroundColor: theme.surface }]}>
+            <View style={[styles.setupSection, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
               {students.length > 0 && (
                 <>
                   <Text style={[styles.setupLabel, { color: theme.textSecondary }]}>Student</Text>
@@ -247,7 +242,7 @@ export default function HomeScreen() {
                     onChangeText={setPassageNameText}
                     style={[
                       styles.input,
-                      { color: theme.text, backgroundColor: theme.surfaceElevated },
+                      { color: theme.text, backgroundColor: theme.surface },
                     ]}
                   />
                 </>
@@ -264,7 +259,7 @@ export default function HomeScreen() {
                 keyboardType="number-pad"
                 style={[
                   styles.input,
-                  { color: theme.text, backgroundColor: theme.surfaceElevated },
+                  { color: theme.text, backgroundColor: theme.surface },
                 ]}
                 accessibilityLabel="Total words in passage"
               />
@@ -284,7 +279,7 @@ export default function HomeScreen() {
           )}
 
           <TouchableOpacity
-            style={[styles.toolCard, shadow.md, { backgroundColor: theme.card }]}
+            style={[styles.toolCard, shadow.sm, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             onPress={() => router.push('/fluency/review?mode=running-record')}
             activeOpacity={0.7}
             accessibilityRole="button"
@@ -304,19 +299,19 @@ export default function HomeScreen() {
             </View>
           </TouchableOpacity>
 
-          <Text style={[styles.sectionTitle, { color: theme.textSecondary, marginTop: spacing.xl }]}>
+          <Text style={[styles.sectionTitle, { color: theme.textSecondary, marginTop: spacing.lg }]}>
             Teacher Tools
           </Text>
 
           <TouchableOpacity
-            style={[styles.toolCard, shadow.md, { backgroundColor: theme.card }]}
+            style={[styles.toolCard, shadow.sm, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             onPress={() => router.push('/fluency/review?mode=grader')}
             activeOpacity={0.7}
             accessibilityRole="button"
             accessibilityLabel="Quick Grader"
           >
             <View style={styles.toolCardContent}>
-              <View style={[styles.toolIconWrap, { backgroundColor: '#F3E8FF' }]}>
+              <View style={[styles.toolIconWrap, { backgroundColor: theme.accentLight }]}>
                 <Text style={styles.toolIcon}>{'✏️'}</Text>
               </View>
               <View style={styles.toolCardText}>
@@ -330,44 +325,40 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1 },
-  content: { padding: spacing.lg, paddingBottom: spacing.xxl },
-  header: { marginBottom: spacing.xl, marginTop: spacing.sm },
-  appName: { fontSize: fontSize.xxxl, fontWeight: '800', letterSpacing: -0.5 },
-  tagline: { fontSize: fontSize.md, marginTop: spacing.xs },
+  content: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xxl },
   sectionTitle: {
-    fontSize: fontSize.xs,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 1.2,
+    ...typography.sectionLabel,
     marginBottom: spacing.sm,
   },
   toolCard: {
     borderRadius: borderRadius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
     padding: spacing.md,
     marginBottom: spacing.sm,
   },
   toolCardContent: { flexDirection: 'row', alignItems: 'center' },
   toolIconWrap: {
-    width: 44,
-    height: 44,
+    width: 40,
+    height: 40,
     borderRadius: borderRadius.md,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: spacing.md,
   },
-  toolIcon: { fontSize: 22 },
+  toolIcon: { fontSize: 20 },
   toolCardText: { flex: 1 },
-  toolTitle: { fontSize: fontSize.md, fontWeight: '600', marginBottom: 2 },
-  toolDesc: { fontSize: fontSize.sm, lineHeight: 19 },
+  toolTitle: { ...typography.cardTitle, marginBottom: 2 },
+  toolDesc: typography.body,
   chevron: { fontSize: 18, fontWeight: '300', marginLeft: spacing.sm },
   setupSection: {
     borderRadius: borderRadius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
     padding: spacing.md,
     marginBottom: spacing.sm,
   },
@@ -377,7 +368,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: borderRadius.full,
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     marginRight: spacing.xs,
     minHeight: 36,
     justifyContent: 'center',
@@ -396,7 +387,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: spacing.lg,
   },
-  startButtonText: { fontSize: fontSize.lg, fontWeight: '700', letterSpacing: 0.3 },
+  startButtonText: { fontSize: fontSize.md, fontWeight: '600', letterSpacing: 0.2 },
   setupLabelRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',

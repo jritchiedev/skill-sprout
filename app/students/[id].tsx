@@ -8,7 +8,7 @@ import { EmptyState } from '@/src/components/EmptyState';
 import { StatBox } from '@/src/components/StatBox';
 import { formatTime } from '@/src/utils/calculations';
 import { deleteStudentMessage } from '@/src/utils/messages';
-import { spacing, fontSize, borderRadius, shadow } from '@/src/theme';
+import { spacing, fontSize, borderRadius, typography, shadow } from '@/src/theme';
 import type { StudentPassageStats } from '@/src/db/attempts';
 
 export default function StudentDetailScreen() {
@@ -97,7 +97,7 @@ export default function StudentDetailScreen() {
           renderItem={({ item }) => {
             const improvement = item.latestWpm - item.firstWpm;
             return (
-              <View style={[styles.passageCard, shadow.sm, { backgroundColor: theme.card }]}>
+              <View style={[styles.passageCard, shadow.sm, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
                 <Text style={[styles.passageTitle, { color: theme.text }]}>
                   {item.passageTitle || 'Untitled'}
                 </Text>
@@ -145,27 +145,28 @@ export default function StudentDetailScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { alignItems: 'center', paddingVertical: spacing.lg },
+  header: { alignItems: 'center', paddingTop: spacing.sm, paddingBottom: spacing.lg },
   avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.sm,
   },
-  avatarText: { color: '#FFF', fontSize: 28, fontWeight: '700' },
-  name: { fontSize: fontSize.xxl, fontWeight: '700' },
-  sub: { fontSize: fontSize.md, marginTop: spacing.xs },
+  avatarText: { color: '#FFF', fontSize: fontSize.xl, fontWeight: '600' },
+  name: { fontSize: fontSize.xl, fontWeight: '700', letterSpacing: -0.4 },
+  sub: { fontSize: fontSize.sm, marginTop: 2 },
   summaryRow: { flexDirection: 'row', paddingHorizontal: spacing.lg, marginBottom: spacing.md },
   emptyContainer: { flex: 1 },
-  listContent: { padding: spacing.lg },
+  listContent: { paddingHorizontal: spacing.lg, paddingBottom: spacing.lg },
   passageCard: {
     borderRadius: borderRadius.lg,
+    borderWidth: StyleSheet.hairlineWidth,
     padding: spacing.md,
     marginBottom: spacing.sm,
   },
-  passageTitle: { fontSize: fontSize.md, fontWeight: '600', marginBottom: spacing.xs },
+  passageTitle: { ...typography.cardTitle, marginBottom: spacing.sm },
   passageStats: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   passStat: { fontSize: fontSize.sm },
   footer: {

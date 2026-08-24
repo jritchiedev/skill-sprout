@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@/src/hooks/useTheme';
-import { borderRadius, fontSize, spacing } from '@/src/theme';
+import { borderRadius, fontSize, spacing, typography } from '@/src/theme';
 
 interface StatBoxProps {
   label: string;
@@ -17,7 +17,8 @@ export function StatBox({ label, value, unit, highlight }: StatBoxProps) {
       style={[
         styles.container,
         {
-          backgroundColor: highlight ? theme.primaryLight : theme.surface,
+          backgroundColor: highlight ? theme.primaryLight : theme.card,
+          borderColor: highlight ? theme.primary : theme.cardBorder,
         },
       ]}
     >
@@ -45,15 +46,17 @@ export function StatBox({ label, value, unit, highlight }: StatBoxProps) {
 const styles = StyleSheet.create({
   container: {
     borderRadius: borderRadius.md,
-    padding: spacing.md,
+    borderWidth: StyleSheet.hairlineWidth,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.sm,
     alignItems: 'center',
     flex: 1,
   },
   label: {
-    fontSize: fontSize.xs,
+    fontSize: 11,
     fontWeight: '500',
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 0.6,
     marginBottom: spacing.xs,
   },
   valueRow: {
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
   value: {
     fontSize: fontSize.xl,
     fontWeight: '700',
-    fontVariant: ['tabular-nums'],
+    ...typography.numeric,
   },
   unit: {
     fontSize: fontSize.sm,

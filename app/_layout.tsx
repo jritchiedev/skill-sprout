@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { getDatabase } from '@/src/db/database';
-import { lightTheme, darkTheme } from '@/src/theme';
+import { lightTheme, darkTheme, fontSize } from '@/src/theme';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -51,7 +51,7 @@ export default function RootLayout() {
         screenOptions={{
           headerStyle: { backgroundColor: theme.background },
           headerTintColor: theme.primary,
-          headerTitleStyle: { fontWeight: '600', color: theme.text },
+          headerTitleStyle: { fontSize: fontSize.md, fontWeight: '600', color: theme.text },
           headerShadowVisible: false,
           contentStyle: { backgroundColor: theme.background },
           headerBackTitle: 'Back',

@@ -46,7 +46,7 @@ export function NumberInput({
         {showStepper && (
           <TouchableOpacity
             onPress={() => onChange(clamp(value - 1))}
-            style={[styles.stepper, { backgroundColor: theme.surface }]}
+            style={[styles.stepper, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             accessibilityLabel={`Decrease ${label}`}
             accessibilityRole="button"
           >
@@ -61,7 +61,8 @@ export function NumberInput({
             styles.input,
             {
               color: theme.text,
-              backgroundColor: theme.surface,
+              backgroundColor: theme.card,
+              borderColor: theme.cardBorder,
             },
           ]}
           accessibilityLabel={accessibilityLabel ?? label}
@@ -70,7 +71,7 @@ export function NumberInput({
         {showStepper && (
           <TouchableOpacity
             onPress={() => onChange(clamp(value + 1))}
-            style={[styles.stepper, { backgroundColor: theme.surface }]}
+            style={[styles.stepper, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             accessibilityLabel={`Increase ${label}`}
             accessibilityRole="button"
           >
@@ -100,15 +101,18 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: minTouchTarget,
     borderRadius: borderRadius.md,
+    borderWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: spacing.md,
     fontSize: fontSize.lg,
     fontWeight: '600',
     textAlign: 'center',
+    fontVariant: ['tabular-nums'],
   },
   stepper: {
     width: minTouchTarget,
     height: minTouchTarget,
     borderRadius: borderRadius.md,
+    borderWidth: StyleSheet.hairlineWidth,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -7,7 +7,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { useFluencyStore } from '@/src/state/fluencyStore';
 import { useTimer } from '@/src/hooks/useTimer';
 import { formatTimeWithTenths } from '@/src/utils/calculations';
-import { spacing, fontSize, borderRadius } from '@/src/theme';
+import { spacing, fontSize, borderRadius, typography } from '@/src/theme';
 
 export default function FluencySessionScreen() {
   const theme = useTheme();
@@ -120,7 +120,7 @@ export default function FluencySessionScreen() {
               {errorCount > 0 && (
                 <TouchableOpacity
                   onPress={handleUndo}
-                  style={[styles.undoButton, { backgroundColor: theme.surface }]}
+                  style={[styles.undoButton, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
                   accessibilityRole="button"
                   accessibilityLabel="Undo last error"
                 >
@@ -130,7 +130,7 @@ export default function FluencySessionScreen() {
             </View>
 
             <TouchableOpacity
-              style={[styles.stopButton, { backgroundColor: theme.surface }]}
+              style={[styles.stopButton, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
               onPress={handleStop}
               activeOpacity={0.7}
               accessibilityRole="button"
@@ -173,10 +173,10 @@ const styles = StyleSheet.create({
   infoChip: { flex: 1, alignItems: 'flex-end', marginLeft: spacing.sm },
   infoText: { fontSize: fontSize.sm },
   timerSection: { alignItems: 'center', paddingVertical: spacing.lg },
-  timer: { fontSize: 64, fontWeight: '200', fontVariant: ['tabular-nums'], letterSpacing: -1 },
+  timer: { fontSize: 68, fontWeight: '200', ...typography.numeric, letterSpacing: -2 },
   liveDot: { width: 8, height: 8, borderRadius: 4, marginTop: spacing.sm },
   readyMessage: { alignItems: 'center', paddingHorizontal: spacing.xl },
-  readyTitle: { fontSize: fontSize.xxxl, fontWeight: '700', marginBottom: spacing.sm },
+  readyTitle: { fontSize: fontSize.xxl, fontWeight: '700', letterSpacing: -0.5, marginBottom: spacing.sm },
   readySubtitle: { fontSize: fontSize.md, textAlign: 'center', lineHeight: 22 },
   startButton: {
     height: 160,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.md,
     marginBottom: spacing.md,
   },
-  startButtonText: { fontSize: 36, fontWeight: '700', letterSpacing: 1 },
+  startButtonText: { fontSize: 32, fontWeight: '700', letterSpacing: 0.5 },
   errorButton: {
     height: 160,
     borderRadius: borderRadius.xl,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: spacing.md,
   },
-  errorButtonText: { fontSize: 36, fontWeight: '700', letterSpacing: 1 },
+  errorButtonText: { fontSize: 32, fontWeight: '700', letterSpacing: 0.5 },
   errorRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -202,19 +202,21 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.lg,
     gap: spacing.md,
   },
-  errorCount: { fontSize: fontSize.xl, fontWeight: '600', fontVariant: ['tabular-nums'] },
+  errorCount: { fontSize: fontSize.xl, fontWeight: '600', ...typography.numeric },
   undoButton: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: borderRadius.full,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   undoText: { fontSize: fontSize.sm, fontWeight: '500' },
   stopButton: {
     minHeight: 52,
     borderRadius: borderRadius.md,
+    borderWidth: StyleSheet.hairlineWidth,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,
   },
-  stopText: { fontSize: fontSize.lg, fontWeight: '600' },
+  stopText: { fontSize: fontSize.md, fontWeight: '600' },
 });

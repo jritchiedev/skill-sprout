@@ -18,22 +18,22 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        // Every tab draws its own <ScreenHeader />. Leaving the navigator's
+        // header on too stacked two titles on top of each other.
+        headerShown: false,
+        sceneStyle: { backgroundColor: theme.background },
         tabBarActiveTintColor: theme.tabBarActive,
         tabBarInactiveTintColor: theme.tabBarInactive,
         tabBarStyle: {
           backgroundColor: theme.tabBar,
           borderTopColor: theme.tabBarBorder,
-          borderTopWidth: 0.5,
+          borderTopWidth: StyleSheet.hairlineWidth,
         },
         tabBarLabelStyle: {
           fontSize: 11,
           fontWeight: '500',
           letterSpacing: 0.1,
         },
-        headerStyle: { backgroundColor: theme.background },
-        headerTintColor: theme.text,
-        headerTitleStyle: { fontWeight: '600' },
-        headerShadowVisible: false,
       }}
     >
       <Tabs.Screen
@@ -74,5 +74,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 24,
   },
-  icon: { fontSize: 20 },
+  icon: { fontSize: 21 },
 });

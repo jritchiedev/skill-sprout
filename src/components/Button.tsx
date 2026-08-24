@@ -37,7 +37,7 @@ export function Button({
 
   const bgColor = {
     primary: theme.primary,
-    secondary: theme.surface,
+    secondary: theme.card,
     danger: theme.error,
     ghost: 'transparent',
   }[variant];
@@ -56,7 +56,7 @@ export function Button({
       style={[
         styles.button,
         { backgroundColor: bgColor, opacity: disabled ? 0.5 : 1 },
-        variant === 'secondary' && { borderWidth: 1, borderColor: theme.border },
+        variant === 'secondary' && { borderWidth: StyleSheet.hairlineWidth, borderColor: theme.border },
         style,
       ]}
       accessibilityRole="button"
@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: fontSize.md,
     fontWeight: '600',
-    letterSpacing: 0.2,
+    letterSpacing: 0.1,
   },
 });
