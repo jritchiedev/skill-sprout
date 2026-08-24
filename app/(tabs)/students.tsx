@@ -64,11 +64,10 @@ export default function StudentsTab() {
       <TouchableOpacity
         style={[styles.studentRow, shadow.sm, { backgroundColor: theme.card }]}
         onPress={() => router.push(`/students/${item.id}`)}
-        onLongPress={() => handleDelete(item)}
         activeOpacity={0.7}
         accessibilityRole="button"
         accessibilityLabel={item.name}
-        accessibilityHint="Tap to view details, hold to delete"
+        accessibilityHint="Tap to view details"
       >
         <View style={[styles.avatar, { backgroundColor: item.avatarColor }]}>
           <Text style={styles.avatarText}>{item.name.charAt(0).toUpperCase()}</Text>
@@ -76,7 +75,15 @@ export default function StudentsTab() {
         <View style={styles.studentInfo}>
           <Text style={[styles.studentName, { color: theme.text }]}>{item.name}</Text>
         </View>
-        <Text style={[styles.chevron, { color: theme.textTertiary }]}>{'›'}</Text>
+        <TouchableOpacity
+          onPress={() => handleDelete(item)}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          style={styles.deleteBtn}
+          accessibilityRole="button"
+          accessibilityLabel={`Delete ${item.name}`}
+        >
+          <Text style={[styles.deleteBtnText, { color: theme.textTertiary }]}>×</Text>
+        </TouchableOpacity>
       </TouchableOpacity>
     );
   }
@@ -162,5 +169,12 @@ const styles = StyleSheet.create({
   avatarText: { color: '#FFF', fontSize: fontSize.lg, fontWeight: '700' },
   studentInfo: { flex: 1 },
   studentName: { fontSize: fontSize.md, fontWeight: '500' },
-  chevron: { fontSize: 20, fontWeight: '300' },
+  deleteBtn: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: spacing.sm,
+  },
+  deleteBtnText: { fontSize: 22, fontWeight: '300', lineHeight: 24 },
 });

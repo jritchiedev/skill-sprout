@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { useLocalSearchParams, useFocusEffect } from 'expo-router';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import { useTheme } from '@/src/hooks/useTheme';
-import { getStudentById, getStudentPassageStats, getAttemptsByStudent } from '@/src/db';
+import { getStudentById, getStudentPassageStats, getAttemptsByStudent, deleteStudent, getStudentAttemptCount } from '@/src/db';
 import { Student, ReadingAttempt } from '@/src/types/models';
 import { EmptyState } from '@/src/components/EmptyState';
 import { StatBox } from '@/src/components/StatBox';
@@ -12,6 +12,7 @@ import type { StudentPassageStats } from '@/src/db/attempts';
 
 export default function StudentDetailScreen() {
   const theme = useTheme();
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const [student, setStudent] = useState<Student | null>(null);
   const [stats, setStats] = useState<StudentPassageStats[]>([]);
@@ -32,6 +33,26 @@ export default function StudentDetailScreen() {
     setStudent(s);
     setStats(st);
     setAttempts(a);
+  }
+
+  async function handleDelete() {
+    if (!student || !id) return;
+    const count = await getStudentAttemptCount(id);
+    const message = count > 0
+      ? `"${student.name}" has ${count} reading ${count === 1 ? 'attempt' : 'attempts'}. Deleting will disassociate those records.`
+      : `Delete "${student.name}"?`;
+
+    Alert.alert('Delete Student', message, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await deleteStudent(id);
+          router.back();
+        },
+      },
+    ]);
   }
 
   if (!student) return null;
@@ -62,11 +83,13 @@ export default function StudentDetailScreen() {
       )}
 
       {stats.length === 0 ? (
-        <EmptyState
-          icon="📖"
-          title="No Readings Yet"
-          message="Complete a fluency reading to see progress here."
-        />
+        <View style={styles.emptyContainer}>
+          <EmptyState
+            icon="📖"
+            title="No Readings Yet"
+            message="Complete a fluency reading to see progress here."
+          />
+        </View>
       ) : (
         <FlatList
           data={stats}
@@ -105,6 +128,18 @@ export default function StudentDetailScreen() {
           }}
         />
       )}
+
+      <View style={[styles.footer, { borderTopColor: theme.separator }]}>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={handleDelete}
+          activeOpacity={0.6}
+          accessibilityRole="button"
+          accessibilityLabel="Delete student"
+        >
+          <Text style={[styles.deleteText, { color: theme.error }]}>Delete Student</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -124,6 +159,7 @@ const styles = StyleSheet.create({
   name: { fontSize: fontSize.xxl, fontWeight: '700' },
   sub: { fontSize: fontSize.md, marginTop: spacing.xs },
   summaryRow: { flexDirection: 'row', paddingHorizontal: spacing.lg, marginBottom: spacing.md },
+  emptyContainer: { flex: 1 },
   listContent: { padding: spacing.lg },
   passageCard: {
     borderRadius: borderRadius.lg,
@@ -133,4 +169,17 @@ const styles = StyleSheet.create({
   passageTitle: { fontSize: fontSize.md, fontWeight: '600', marginBottom: spacing.xs },
   passageStats: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   passStat: { fontSize: fontSize.sm },
+  footer: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+  },
+  deleteButton: {
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+  },
+  deleteText: {
+    fontSize: fontSize.md,
+    fontWeight: '500',
+  },
 });
