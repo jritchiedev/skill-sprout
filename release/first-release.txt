@@ -27,10 +27,14 @@ Support: https://jritchiedev.github.io/skill-sprout/
 Privacy: https://jritchiedev.github.io/skill-sprout/privacy.html
 Pages uses codex/first-app-store-release:/docs. Keep the branch until Pages is moved to main after merge.
 
+APP REVIEW SUBMITTED
+Submitted November 5, 2026 at 11:39 PM America/Chicago.
+iPhone-only version 1.0.0 (3): Waiting for Review.
+Four original 1206 x 2622 PNG screenshots uploaded and accepted.
+Apple submission ID: 3545d6da-a18d-4c0d-af39-437bd4711ce4
+Review details: https://appstoreconnect.apple.com/apps/6831458097/distribution/reviewsubmissions/details/3545d6da-a18d-4c0d-af39-437bd4711ce4
+Automatic release after Apple approval. Free in the United States.
+
 REMAINING
-Wait for Apple beta review before external testers can install.
-iPhone-only build 3 is built, uploaded, processed and selected in Apple.
-Apple validation confirms only the iPhone screenshot remains required.
-Provide an original native iPhone screenshot, e.g. 1179 x 2556 or 1206 x 2622.
-Review remaining dependency advisories (see npm audit; do not blindly force incompatible Expo upgrades).
-Submit the tested build and listing to App Review. Public release requires Apple approval.
+Wait for Apple App Review and respond to any feedback.
+Apple approval is required before the public release goes live.

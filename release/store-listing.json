@@ -1,5 +1,5 @@
 {
-  "status": "iPhone-only production build 1.0.0 (3) finished, uploaded, processed by Apple and selected for release. Add for Review validation confirms the iPad screenshot requirement is removed. The only listed blocker is an iPhone Dynamic Island (medium display) screenshot. Public App Store release has not been submitted.",
+  "status": "Submitted iPhone-only version 1.0.0 (3) to Apple App Review. Apple confirmed Waiting for Review on November 5, 2026 at 11:39 PM America/Chicago. Automatic release after approval; free in the United States.",
   "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
@@ -8,11 +8,7 @@
   "primaryCategory": "Education",
   "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
   "remaining": [
-    "Wait for Apple beta review for external testing",
-    "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
-    "Capture and upload genuine iPhone screenshots",
-    "Review remaining dependency advisories before release",
-    "Submit the tested build and completed listing to App Review; Apple approval is required before public release"
+    "Wait for Apple App Review and respond to any review feedback. Automatic public release follows approval."
   ],
   "price": "Free",
   "supportUrl": "https://jritchiedev.github.io/skill-sprout/",
@@ -36,19 +32,26 @@
     "externalTesters": 2,
     "externalBuildStatus": "Waiting for Review"
   },
-  "appleValidationBlockers": [
-    "Upload a screenshot for iPhone with Dynamic Island (medium display)"
-  ],
+  "appleValidationBlockers": [],
   "screenshotReview": {
-    "received": 8,
-    "widthRange": [
-      626,
-      642
-    ],
-    "height": 1280,
-    "needs": "Original, uncropped iPhone screenshots at Apple-supported dimensions. iPad screenshots are not needed after the new iPhone-only binary is selected."
+    "uploaded": 4,
+    "accepted": true,
+    "width": 1206,
+    "height": 2622,
+    "format": "PNG",
+    "deviceSlot": "iPhone with Dynamic Island (medium display)",
+    "files": [
+      "IMG_3513.PNG",
+      "IMG_3514.PNG",
+      "IMG_3515.PNG",
+      "IMG_3516.PNG"
+    ]
   },
   "releaseDeviceFamily": "iPhone",
   "selectedBuildVersion": "3",
-  "lastAppleValidationBuildVersion": "3"
+  "lastAppleValidationBuildVersion": "3",
+  "appReviewSubmissionId": "3545d6da-a18d-4c0d-af39-437bd4711ce4",
+  "appReviewStatus": "Waiting for Review",
+  "appReviewSubmittedAt": "2026-11-05T23:39:00-06:00",
+  "releaseMode": "Automatically release after approval"
 }
