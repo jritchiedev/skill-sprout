@@ -1,6 +1,6 @@
 {
-  "status": "Draft for first release. Local tests, TypeScript, Expo Doctor and iOS bundle passed. Apple signing, native device QA, screenshots and App Review remain pending.",
-  "name": "Skill Sprout",
+  "status": "Production iOS 1.0.0 (2) uploaded to App Store Connect. Store text, Education category, no-third-party-content declaration and general 4+ rating saved. Privacy, pricing, review contact, device QA, screenshots and App Review submission remain in progress.",
+  "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
   "description": "Skill Sprout puts practical reading and classroom tools in one place.\n\nFLUENCY TIMER\nTime oral reading, mark and undo errors, review results, and calculate words correct per minute and reading accuracy.\n\nRUNNING RECORD\nCalculate reading accuracy and self-correction ratios.\n\nQUICK GRADER\nTurn total questions and incorrect answers into an assignment percentage.\n\nSTUDENTS AND HISTORY\nCreate student profiles, save passage titles and word counts, and review previous reading attempts.\n\nLOCAL STORAGE\nNo account is required to use the app. Student profiles and reading results are stored on your device. No advertising or third-party analytics.",
@@ -8,16 +8,21 @@
   "primaryCategory": "Education",
   "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
   "remaining": [
-    "Expo project linked: @joshritchiedev/skillsprout. Register/confirm Apple bundle ID dev.joshritchie.skillsprout",
-    "Set App Store Connect app ID and signing credentials",
-    "Verify deployed support/privacy URLs; support contact is the public GitHub issue tracker",
-    "Confirm price, territories, copyright, age rating and audience",
-    "Verify privacy declarations against the production binary",
+    "Complete App Privacy and Free pricing in App Store Connect",
+    "Complete private App Review contact details",
+    "Confirm launch territories and any applicable regional requirements",
     "Capture real iPhone and iPad screenshots",
     "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
+    "Review remaining dependency advisories before release",
     "Submit the tested build and listing to App Review; Apple approval is required before publication"
   ],
   "price": "Free",
   "supportUrl": "https://jritchiedev.github.io/skill-sprout/",
-  "privacyPolicyUrl": "https://jritchiedev.github.io/skill-sprout/privacy.html"
+  "privacyPolicyUrl": "https://jritchiedev.github.io/skill-sprout/privacy.html",
+  "appleAppId": "6831458097",
+  "buildId": "9ed39738-e0fc-4daa-b02a-fdc7d741fb3f",
+  "buildVersion": "2",
+  "ageRating": "4+",
+  "contentRights": "No third-party content; confirmed by owner.",
+  "submissionId": "d4e4d9e8-c2cc-47b3-9723-9a6fb4d0f746"
 }
