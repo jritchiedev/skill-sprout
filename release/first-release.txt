@@ -15,7 +15,11 @@ COMPLETED
 Signed production build uploaded to Apple.
 Store description, keywords, support/marketing URLs and review notes saved.
 Education category, subtitle, content rights and general 4+ age rating saved.
-Owner confirmed Free pricing and no-data-collection declaration.
+Free pricing and United States launch availability saved.
+Data Not Collected privacy label published after owner confirmation.
+Private App Review contact details saved in Apple only.
+One internal tester invited. Family Testing has two external testers.
+Build 1.0.0 (2) is Waiting for Review for external beta testing.
 36 unit tests, TypeScript, 21 Expo checks and production iOS bundle passed.
 
 PUBLIC URLS
@@ -24,8 +28,7 @@ Privacy: https://jritchiedev.github.io/skill-sprout/privacy.html
 Pages uses codex/first-app-store-release:/docs. Keep the branch until Pages is moved to main after merge.
 
 REMAINING
-Finish privacy, pricing and private review-contact setup in Apple.
-Confirm launch territories and regional requirements.
+Wait for Apple beta review before external testers can install.
 Test on iPhone and iPad through TestFlight and capture native screenshots.
 Review remaining dependency advisories (see npm audit; do not blindly force incompatible Expo upgrades).
 Submit the tested build and listing to App Review. Public release requires Apple approval.

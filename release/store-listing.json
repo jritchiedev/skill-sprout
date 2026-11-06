@@ -1,5 +1,5 @@
 {
-  "status": "Production iOS 1.0.0 (2) uploaded to App Store Connect. Store text, Education category, no-third-party-content declaration and general 4+ rating saved. Privacy, pricing, review contact, device QA, screenshots and App Review submission remain in progress.",
+  "status": "App Store metadata saved; 1.0.0 (2) uploaded and attached. Privacy label published, Free pricing and United States launch availability saved. One internal tester invited. Family Testing has two external testers and build 2 is Waiting for Review for beta testing. Public App Store release is not submitted.",
   "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
@@ -8,13 +8,11 @@
   "primaryCategory": "Education",
   "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
   "remaining": [
-    "Complete App Privacy and Free pricing in App Store Connect",
-    "Complete private App Review contact details",
-    "Confirm launch territories and any applicable regional requirements",
-    "Capture real iPhone and iPad screenshots",
+    "Wait for Apple beta review for external testing",
     "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
+    "Capture and upload genuine iPhone and iPad screenshots",
     "Review remaining dependency advisories before release",
-    "Submit the tested build and listing to App Review; Apple approval is required before publication"
+    "Submit the tested build and completed listing to App Review; Apple approval is required before public release"
   ],
   "price": "Free",
   "supportUrl": "https://jritchiedev.github.io/skill-sprout/",
@@ -24,5 +22,18 @@
   "buildVersion": "2",
   "ageRating": "4+",
   "contentRights": "No third-party content; confirmed by owner.",
-  "submissionId": "d4e4d9e8-c2cc-47b3-9723-9a6fb4d0f746"
+  "submissionId": "d4e4d9e8-c2cc-47b3-9723-9a6fb4d0f746",
+  "privacyLabel": "Data Not Collected",
+  "launchTerritories": [
+    "United States"
+  ],
+  "reviewContactSavedInApple": true,
+  "testFlight": {
+    "internalGroup": "First Release Testing",
+    "internalTesters": 1,
+    "internalInvitationStatus": "Invited",
+    "externalGroup": "Family Testing",
+    "externalTesters": 2,
+    "externalBuildStatus": "Waiting for Review"
+  }
 }
