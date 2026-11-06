@@ -29,6 +29,6 @@ Pages uses codex/first-app-store-release:/docs. Keep the branch until Pages is m
 
 REMAINING
 Wait for Apple beta review before external testers can install.
-Test on iPhone and iPad through TestFlight and capture native screenshots.
+First release targets iPhone only. Build, upload and select the replacement binary; then test on iPhone and capture native screenshots.
 Review remaining dependency advisories (see npm audit; do not blindly force incompatible Expo upgrades).
 Submit the tested build and listing to App Review. Public release requires Apple approval.

@@ -1,5 +1,5 @@
 {
-  "status": "Apple Add for Review validation checked. Content-rights declaration persisted. Only listed blockers: required iPhone Dynamic Island (medium display) screenshot and 13-inch iPad screenshot. Eight supplied JPEGs are 626–642 x 1280 and are not accepted native screenshot dimensions. Public App Store release has not been submitted.",
+  "status": "First release changed to iPhone-only at owner request. A replacement signed build is required before Apple can remove the iPad screenshot requirement. Full-resolution iPhone screenshots are still needed.",
   "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
@@ -8,9 +8,10 @@
   "primaryCategory": "Education",
   "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
   "remaining": [
+    "Build, upload and select the new iPhone-only binary",
     "Wait for Apple beta review for external testing",
     "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
-    "Capture and upload genuine iPhone and iPad screenshots",
+    "Capture and upload genuine iPhone screenshots",
     "Review remaining dependency advisories before release",
     "Submit the tested build and completed listing to App Review; Apple approval is required before public release"
   ],
@@ -47,6 +48,7 @@
       642
     ],
     "height": 1280,
-    "needs": "Original, uncropped device screenshots at Apple-supported dimensions, including an iPad screenshot"
-  }
+    "needs": "Original, uncropped iPhone screenshots at Apple-supported dimensions. iPad screenshots are not needed after the new iPhone-only binary is selected."
+  },
+  "releaseDeviceFamily": "iPhone"
 }
