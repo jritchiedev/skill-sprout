@@ -4,16 +4,14 @@
     "slug": "skillsprout",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/skill-sprout-icon.png",
     "scheme": "skillsprout",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.skillsprout.app",
-      "buildNumber": "1",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Skill Sprout does not currently use the microphone, but future versions may support audio recording for reading assessments."
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -36,7 +34,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/skill-sprout-icon.png",
           "resizeMode": "contain",
           "backgroundColor": "#059669"
         }
@@ -45,6 +43,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a86a0709-7543-439d-8543-a925945743bc"
+      }
+    },
+    "owner": "joshritchiedev"
   }
 }

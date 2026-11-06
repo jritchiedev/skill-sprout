@@ -1,0 +1,32 @@
+SKILL SPROUT — FIRST APP STORE RELEASE
+
+Confirmed price: Free
+Expo project: https://expo.dev/accounts/joshritchiedev/projects/skillsprout
+Expo project ID: a86a0709-7543-439d-8543-a925945743bc
+Bundle ID to register: com.skillsprout.app
+Version: 1.0.0
+
+CURRENT BLOCKERS
+Apple signing credentials are not configured. No signed build has been uploaded.
+Local browser access is disabled. The first App Store Connect app record has not been created.
+GitHub CLI is authenticated as jritchiedev with admin access. The GitHub plugin remains connected as jritchie17; repository publication uses the CLI.
+
+NEXT STEPS
+1. Enable browser access and sign in to Apple Developer and App Store Connect.
+2. Register com.skillsprout.app under the intended Apple team.
+3. Create the first iOS app record: Skill Sprout, English (U.S.), bundle ID com.skillsprout.app, SKU skillsprout-ios. Confirm name availability with Apple.
+4. Configure signing with npx eas-cli credentials --platform ios, or run npx eas-cli build --platform ios --profile production interactively. Authenticate with Apple directly; do not share passwords in chat.
+5. Put the numeric Apple app ID into submit.production.ios.ascAppId in eas.json.
+6. Build: npx eas-cli build --platform ios --profile production
+7. Upload that exact build: npx eas-cli submit --platform ios --profile production --id BUILD_ID
+8. Test via TestFlight on iPhone and iPad, including persistence, deletion, large text and dark mode. Capture screenshots from the native build.
+9. Support URL: https://jritchiedev.github.io/skill-sprout/
+   Privacy Policy URL: https://jritchiedev.github.io/skill-sprout/privacy.html
+   GitHub Pages is configured from codex/first-app-store-release:/docs. Keep this branch until Pages is moved to main after merge.
+10. Complete the draft in release/store-listing.json with screenshots, copyright, audience, age rating, privacy declarations, availability, and Free pricing. Submit the tested build to App Review.
+
+VALIDATION
+36 tests, TypeScript check, 21/21 Expo Doctor checks and iOS Hermes bundle passed after SDK alignment.
+Compatible npm security fixes applied. Remaining audit findings include Expo Router query-string/decode-uri-component and build/test dependencies. Review their applicability before release; the suggested automatic fixes change Expo/Jest major versions.
+
+App Store submission has not happened. Public release requires Apple approval.

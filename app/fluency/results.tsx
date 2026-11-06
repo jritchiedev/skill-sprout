@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,6 +18,7 @@ export default function ResultsScreen() {
   const store = useFluencyStore();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const saveInFlight = useRef(false);
 
   const totalWords = store.getEffectiveTotalWords();
   const elapsedMs = store.getEffectiveElapsedMs();
@@ -27,6 +28,8 @@ export default function ResultsScreen() {
   const accuracy = store.calculatedAccuracy ?? 0;
 
   async function handleSave() {
+    if (saveInFlight.current || saved) return;
+    saveInFlight.current = true;
     setSaving(true);
     try {
       const now = new Date().toISOString();
@@ -47,21 +50,24 @@ export default function ResultsScreen() {
         },
         store.errorEvents.map((e) => ({ elapsedMilliseconds: e.elapsedMilliseconds }))
       );
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setSaved(true);
+      void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
     } catch (err) {
       Alert.alert('Save Failed', 'Could not save the reading attempt. Please try again.');
     } finally {
+      saveInFlight.current = false;
       setSaving(false);
     }
   }
 
   function handleTryAgain() {
+    if (saveInFlight.current) return;
     store.resetForRetry();
     router.replace('/fluency/session');
   }
 
   function handleDone() {
+    if (saveInFlight.current) return;
     store.reset();
     router.dismissAll();
   }
@@ -102,9 +108,9 @@ export default function ResultsScreen() {
             </View>
           )}
           <View style={{ height: spacing.sm }} />
-          <Button title="Try Again" variant="secondary" onPress={handleTryAgain} />
+          <Button title="Try Again" disabled={saving} variant="secondary" onPress={handleTryAgain} />
           <View style={{ height: spacing.sm }} />
-          <Button title="Done" variant="ghost" onPress={handleDone} />
+          <Button title="Done" disabled={saving} variant="ghost" onPress={handleDone} />
         </View>
       </View>
     </SafeAreaView>
