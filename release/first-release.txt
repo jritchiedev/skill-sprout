@@ -20,7 +20,9 @@ NEXT STEPS
 6. Build: npx eas-cli build --platform ios --profile production
 7. Upload that exact build: npx eas-cli submit --platform ios --profile production --id BUILD_ID
 8. Test via TestFlight on iPhone and iPad, including persistence, deletion, large text and dark mode. Capture screenshots from the native build.
-9. Publish docs/index.html and docs/privacy.html to public hosting and verify both URLs. Use them for Support URL and Privacy Policy URL.
+9. Support URL: https://jritchiedev.github.io/skill-sprout/
+   Privacy Policy URL: https://jritchiedev.github.io/skill-sprout/privacy.html
+   GitHub Pages is configured from codex/first-app-store-release:/docs. Keep this branch until Pages is moved to main after merge.
 10. Complete the draft in release/store-listing.json with screenshots, copyright, audience, age rating, privacy declarations, availability, and Free pricing. Submit the tested build to App Review.
 
 VALIDATION

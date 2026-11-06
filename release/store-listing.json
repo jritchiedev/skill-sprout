@@ -10,12 +10,14 @@
   "remaining": [
     "Expo project linked: @joshritchiedev/skillsprout. Register/confirm Apple bundle ID com.skillsprout.app",
     "Set App Store Connect app ID and signing credentials",
-    "Provide public support URL and privacy policy URL with publisher contact",
+    "Verify deployed support/privacy URLs; support contact is the public GitHub issue tracker",
     "Confirm price, territories, copyright, age rating and audience",
     "Verify privacy declarations against the production binary",
     "Capture real iPhone and iPad screenshots",
     "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
     "Submit the tested build and listing to App Review; Apple approval is required before publication"
   ],
-  "price": "Free"
+  "price": "Free",
+  "supportUrl": "https://jritchiedev.github.io/skill-sprout/",
+  "privacyPolicyUrl": "https://jritchiedev.github.io/skill-sprout/privacy.html"
 }
