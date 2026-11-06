@@ -1,5 +1,5 @@
 {
-  "status": "iPhone-only production build 1.0.0 (3) finished and uploaded to Apple. Apple processing is in progress; release still has build 2 selected until build 3 becomes available. Full-resolution iPhone screenshots remain required.",
+  "status": "iPhone-only production build 1.0.0 (3) finished, uploaded, processed by Apple and selected for release. Add for Review validation confirms the iPad screenshot requirement is removed. The only listed blocker is an iPhone Dynamic Island (medium display) screenshot. Public App Store release has not been submitted.",
   "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
@@ -8,7 +8,6 @@
   "primaryCategory": "Education",
   "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
   "remaining": [
-    "Build, upload and select the new iPhone-only binary",
     "Wait for Apple beta review for external testing",
     "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
     "Capture and upload genuine iPhone screenshots",
@@ -38,7 +37,6 @@
     "externalBuildStatus": "Waiting for Review"
   },
   "appleValidationBlockers": [
-    "Upload a screenshot for 13-inch iPad displays",
     "Upload a screenshot for iPhone with Dynamic Island (medium display)"
   ],
   "screenshotReview": {
@@ -51,6 +49,6 @@
     "needs": "Original, uncropped iPhone screenshots at Apple-supported dimensions. iPad screenshots are not needed after the new iPhone-only binary is selected."
   },
   "releaseDeviceFamily": "iPhone",
-  "selectedBuildVersion": "2",
-  "lastAppleValidationBuildVersion": "2"
+  "selectedBuildVersion": "3",
+  "lastAppleValidationBuildVersion": "3"
 }

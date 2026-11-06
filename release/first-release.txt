@@ -5,8 +5,8 @@ On-device name: Skill Sprout
 Apple app ID: 6831458097
 Apple team: Q9RU6628YB
 Bundle ID: dev.joshritchie.skillsprout
-Version/build: 1.0.0 (2)
-Build ID: 9ed39738-e0fc-4daa-b02a-fdc7d741fb3f
+Version/build: 1.0.0 (3)
+Build ID: 43306c9c-102e-423b-9371-b168677de5e1
 Expo project: https://expo.dev/accounts/joshritchiedev/projects/skillsprout
 App Store Connect: https://appstoreconnect.apple.com/apps/6831458097/distribution
 TestFlight: https://appstoreconnect.apple.com/apps/6831458097/testflight/ios
@@ -29,6 +29,8 @@ Pages uses codex/first-app-store-release:/docs. Keep the branch until Pages is m
 
 REMAINING
 Wait for Apple beta review before external testers can install.
-First release targets iPhone only. Build, upload and select the replacement binary; then test on iPhone and capture native screenshots.
+iPhone-only build 3 is built, uploaded, processed and selected in Apple.
+Apple validation confirms only the iPhone screenshot remains required.
+Provide an original native iPhone screenshot, e.g. 1179 x 2556 or 1206 x 2622.
 Review remaining dependency advisories (see npm audit; do not blindly force incompatible Expo upgrades).
 Submit the tested build and listing to App Review. Public release requires Apple approval.
