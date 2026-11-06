@@ -1,5 +1,5 @@
 {
-  "status": "First release changed to iPhone-only at owner request. A replacement signed build is required before Apple can remove the iPad screenshot requirement. Full-resolution iPhone screenshots are still needed.",
+  "status": "iPhone-only production build 1.0.0 (3) finished and uploaded to Apple. Apple processing is in progress; release still has build 2 selected until build 3 becomes available. Full-resolution iPhone screenshots remain required.",
   "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
@@ -19,11 +19,11 @@
   "supportUrl": "https://jritchiedev.github.io/skill-sprout/",
   "privacyPolicyUrl": "https://jritchiedev.github.io/skill-sprout/privacy.html",
   "appleAppId": "6831458097",
-  "buildId": "9ed39738-e0fc-4daa-b02a-fdc7d741fb3f",
-  "buildVersion": "2",
+  "buildId": "43306c9c-102e-423b-9371-b168677de5e1",
+  "buildVersion": "3",
   "ageRating": "4+",
   "contentRights": "No third-party content; confirmed by owner.",
-  "submissionId": "d4e4d9e8-c2cc-47b3-9723-9a6fb4d0f746",
+  "submissionId": "b994117e-5cf4-4fe8-aa90-2209ab55a39b",
   "privacyLabel": "Data Not Collected",
   "launchTerritories": [
     "United States"
@@ -50,5 +50,7 @@
     "height": 1280,
     "needs": "Original, uncropped iPhone screenshots at Apple-supported dimensions. iPad screenshots are not needed after the new iPhone-only binary is selected."
   },
-  "releaseDeviceFamily": "iPhone"
+  "releaseDeviceFamily": "iPhone",
+  "selectedBuildVersion": "2",
+  "lastAppleValidationBuildVersion": "2"
 }
