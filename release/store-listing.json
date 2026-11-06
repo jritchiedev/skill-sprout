@@ -1,5 +1,5 @@
 {
-  "status": "App Store metadata saved; 1.0.0 (2) uploaded and attached. Privacy label published, Free pricing and United States launch availability saved. One internal tester invited. Family Testing has two external testers and build 2 is Waiting for Review for beta testing. Public App Store release is not submitted.",
+  "status": "Apple Add for Review validation checked. Content-rights declaration persisted. Only listed blockers: required iPhone Dynamic Island (medium display) screenshot and 13-inch iPad screenshot. Eight supplied JPEGs are 626–642 x 1280 and are not accepted native screenshot dimensions. Public App Store release has not been submitted.",
   "name": "Skill Sprout: Reading Tools",
   "subtitle": "Tools for growing readers",
   "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
@@ -35,5 +35,18 @@
     "externalGroup": "Family Testing",
     "externalTesters": 2,
     "externalBuildStatus": "Waiting for Review"
+  },
+  "appleValidationBlockers": [
+    "Upload a screenshot for 13-inch iPad displays",
+    "Upload a screenshot for iPhone with Dynamic Island (medium display)"
+  ],
+  "screenshotReview": {
+    "received": 8,
+    "widthRange": [
+      626,
+      642
+    ],
+    "height": 1280,
+    "needs": "Original, uncropped device screenshots at Apple-supported dimensions, including an iPad screenshot"
   }
 }
