@@ -3,11 +3,19 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, BackHandler } from 're
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
+import { useKeepAwake } from 'expo-keep-awake';
+
 import { useTheme } from '@/src/hooks/useTheme';
 import { useFluencyStore } from '@/src/state/fluencyStore';
 import { useTimer } from '@/src/hooks/useTimer';
 import { formatTimeWithTenths } from '@/src/utils/calculations';
 import { spacing, fontSize, borderRadius, typography } from '@/src/theme';
+
+
+function ActiveSessionKeepAwake() {
+  useKeepAwake();
+  return null;
+}
 
 export default function FluencySessionScreen() {
   const theme = useTheme();
@@ -76,6 +84,7 @@ export default function FluencySessionScreen() {
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: theme.background }]}>
       <View style={styles.container}>
+        {isRunning && <ActiveSessionKeepAwake />}
         <View style={styles.topRow}>
           <TouchableOpacity
             onPress={isRunning ? confirmAbandon : () => { store.reset(); router.back(); }}

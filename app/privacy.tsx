@@ -46,7 +46,7 @@ export default function PrivacyScreen() {
       <Text style={[styles.subheading, { color: theme.text }]}>Data Deletion</Text>
       <Text style={[styles.body, { color: theme.textSecondary }]}>
         You can delete any student or passage data at any time from within the app. Uninstalling
-        the app removes all data permanently.
+        the app removes its local database. Your operating system may retain copies in device backups according to your backup settings.
       </Text>
 
       <Text style={[styles.subheading, { color: theme.text }]}>Future Updates</Text>

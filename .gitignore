@@ -43,3 +43,5 @@ yarn-error.*
 # EAS / App Store secrets
 google-services.json
 *.keystore
+
+/dist-ios/

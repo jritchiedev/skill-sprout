@@ -1,0 +1,21 @@
+{
+  "status": "Draft for first release. Local tests, TypeScript, Expo Doctor and iOS bundle passed. Apple signing, native device QA, screenshots and App Review remain pending.",
+  "name": "Skill Sprout",
+  "subtitle": "Tools for growing readers",
+  "promotionalText": "Measure reading fluency, track student progress, and simplify everyday grading with tools for parents, teachers, and tutors.",
+  "description": "Skill Sprout puts practical reading and classroom tools in one place.\n\nFLUENCY TIMER\nTime oral reading, mark and undo errors, review results, and calculate words correct per minute and reading accuracy.\n\nRUNNING RECORD\nCalculate reading accuracy and self-correction ratios.\n\nQUICK GRADER\nTurn total questions and incorrect answers into an assignment percentage.\n\nSTUDENTS AND HISTORY\nCreate student profiles, save passage titles and word counts, and review previous reading attempts.\n\nLOCAL STORAGE\nNo account is required to use the app. Student profiles and reading results are stored on your device. No advertising or third-party analytics.",
+  "keywords": "reading,fluency,teacher,tutor,student,accuracy,grader,running record,literacy",
+  "primaryCategory": "Education",
+  "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
+  "remaining": [
+    "Expo project linked: @joshritchiedev/skillsprout. Register/confirm Apple bundle ID com.skillsprout.app",
+    "Set App Store Connect app ID and signing credentials",
+    "Provide public support URL and privacy policy URL with publisher contact",
+    "Confirm price, territories, copyright, age rating and audience",
+    "Verify privacy declarations against the production binary",
+    "Capture real iPhone and iPad screenshots",
+    "Test installed iOS build: create/edit/delete student and passage, timer/undo/review/save, relaunch persistence, history deletion, light/dark mode and larger text",
+    "Submit the tested build and listing to App Review; Apple approval is required before publication"
+  ],
+  "price": "Free"
+}
