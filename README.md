@@ -74,7 +74,7 @@ npm run lint
 1. Install EAS CLI: `npm install -g eas-cli`
 2. Log in: `eas login`
 3. Link the existing Expo project with `eas init` (select the existing project).
-4. Verify that `com.skillsprout.app` matches your registered Apple bundle identifier.
+4. Verify that `dev.joshritchie.skillsprout` matches your registered Apple bundle identifier.
 5. Configure signing through `eas credentials --platform ios`.
 6. Use `eas submit` interactively to select the App Store Connect app. For CI, set its numeric `ascAppId` in `eas.json` and configure an App Store Connect API key through EAS.
 

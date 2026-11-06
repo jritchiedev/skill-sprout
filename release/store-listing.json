@@ -8,7 +8,7 @@
   "primaryCategory": "Education",
   "reviewNotes": "No login is required. On the home screen, select Fluency Timer, enter a passage name and total word count, then choose Start Reading. On the timer screen, tap Start, use Error and Undo while reading, then Stop Reading. Review the values, Calculate, and continue to Save Result. Students and passages can be added from the Students tab and More > Manage Passages. Running Record and Quick Grader are available on the home screen.",
   "remaining": [
-    "Expo project linked: @joshritchiedev/skillsprout. Register/confirm Apple bundle ID com.skillsprout.app",
+    "Expo project linked: @joshritchiedev/skillsprout. Register/confirm Apple bundle ID dev.joshritchie.skillsprout",
     "Set App Store Connect app ID and signing credentials",
     "Verify deployed support/privacy URLs; support contact is the public GitHub issue tracker",
     "Confirm price, territories, copyright, age rating and audience",

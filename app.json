@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.skillsprout.app",
+      "bundleIdentifier": "dev.joshritchie.skillsprout",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
